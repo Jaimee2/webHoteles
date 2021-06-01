@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Admin</title>
+</head>
+<body>
+    <h1>Iniciar sesión Administrador</h1>
+	
+	<form action="index.php" method="post">
+		<label for="admin">Administrador : </label>
+		<input type="text" id="admin" name="admin" maxlength="50" required><br/>
+		<label for="clave" required>Contraseña : </label>
+		<input type="password" id="clave" name="clave" minlength="4" maxlength="15" required><br/>
+		
+        <input type="hidden" name="accion" value="principal">
+		<input type="hidden" name="id" value="3">
+		
+        <input type="submit" value="Enviar">
+		<input type="reset" value="Borrar">
+	</form>
+    
+</body>
+</html>

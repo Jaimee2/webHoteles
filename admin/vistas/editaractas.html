@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+
+    <script type="text/javascript">
+		function alerta(idActa, idComentario) {
+			var direccion = "index.php?accion=acta&id=5&idacta=";
+			direccion = direccion.concat(idActa);
+			direccion = direccion.concat("&idcomentario=");
+			direccion = direccion.concat(idComentario);
+		    var opcion = confirm("¿Está seguro de que desea eliminar el comentario?");
+		    if (opcion == true) {
+		        window.location = direccion;
+			} 
+		}
+	</script>
+</head>
+<body>
+    <h1>Editar reseña</h1>
+	<p>A continuación, podrá modificar el titulo de la reseña y la descripción</p>
+
+    <form action="index.php" method="POST">
+        <h2><label for="titulo">Título: </label></h2>
+		<input type="text" name="titulo" value="##titulo##">
+
+        <h3><label for="ciudad">Pais: </label> ##pais##</h3>
+        <h4><label for="lugar">codigo Postal: </label>##codigopostal##</h4>
+        <label for="puntuacion">Estrellas: </label>##puntuacion##<br/><br/>
+        <label for="descripcion">Descripción: </label><br/>
+		<textarea name="descripcion" rows="10" cols="40" minlength="25" maxlength="1500" required>
+            ##descripcion##</textarea><br/><br/>
+
+        <input type="hidden" name="accion" value="acta">
+		<input type="hidden" name="id" value="6">
+		<input type="hidden" name="idacta" value="##idacta##">
+
+		<input type="submit" value="Editar">
+		<input type="reset" value="Limpiar">
+
+    
+
+    </form>
+	<br><br>
+	<hr>
+	<h2>Fotos </h2>
+	##Foto##		
+		<tr>
+			<td><img src="##ruta##" width="15%"></td>
+		</tr>
+		##Foto##
+		<br><br>
+	<hr>
+
+    <h2>Comentarios</h2>
+
+	##Comentario##
+	<h3>##usuarioComentario##</h3>
+	<p>##fechaComentario##</p>
+	<p>##opinion##</p>
+	##opcionEliminar##
+	##Comentario##
+	<br/><br/>
+
+
+	<a href="index.php">Volver</a>
+
+
+
+
+</body>
+</html>

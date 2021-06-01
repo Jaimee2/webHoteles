@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crear reseña</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="dropzone/dropzone.css" type="text/css" rel="stylesheet" />
+        <script src="dropzone/dropzone.js"></script>
+
+       <script id="text/javascript">
+           $(document).ready(
+               function(){
+                $.ajax({
+                        type:"GET",
+                        url : "index.php?accion=pais&id=1",
+                        dataType: "html",
+                        success: function(response) {
+                           
+                            console.log(response);
+                                $("div#pais").html(response);
+                        },
+                        error: function() {
+                            console.log("No se ha podido obtener la información");
+                        }
+                });
+           });
+       </script>
+
+
+
+    </head>
+    <body>
+        <p id = "primero"></p>
+        <h1>Crear nueva reseña</h1>
+        <p>Introduzca los datos correspondientes a la reseña:</p>
+
+        <form action="index.php" method="post">
+		
+            <label for="titulo">Título: </label>
+            <input type="text" id="titulo" name="titulo" minlength="10" maxlength="50" required>&nbsp;&nbsp;&nbsp;&nbsp;
+    
+            <label for="puntuacion">Estrellas: </label>
+            <select name="puntuacion" id="puntiacion">
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+            </select><br/><br/>
+            
+            <label for="descripcion">Descripción: </label><br/>
+            <textarea name="descripcion" rows="10" cols="40" minlength="25" maxlength="1500" required></textarea><br/>
+            <label for="titulo">codigo Postal: </label>
+            <input type="text" id="idlugar" name="idlugar">
+    
+            <div id="pais"></div>
+            <!--<div id="ciudad"></div>
+            <div id="lugar"></div>
+    
+            <br/>
+    
+            <label for="fotos">Fotos: </label>
+            
+            <div id="dropzoneFrom" class="dropzone">
+    
+            </div> <br/>
+    
+        -->
+            <div id="dropzoneFrom" class="dropzone"></div>
+
+            <input type="hidden" name="accion" value="acta">
+            <input type="hidden" name="id" value="2">
+    
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+            
+        </form>
+       
+
+        <script type="text/javascript">
+    
+			Dropzone.autoDiscover = false;
+	        $("div#dropzoneFrom").dropzone({
+	        	url: "dropzone/upload.php",
+	        	dictDefaultMessage : "Arrastre aquí sus fotos.<br/> (No refresque la página una vez haya subido sus fotos)",
+	        	acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
+	        	maxFiles: 5, 
+	        	maxFilesize : 10,
+	            addRemoveLinks: true,
+	            maxfilesexceeded: function(file) {
+				    removeFile(file);
+				},
+	            renameFile: function (file) {
+	            	var n = Math.floor(Math.random() * 11);
+					var k = Math.floor(Math.random() * 1000000);
+					var m = n + k;
+					m = m.toString();
+					let newName = new Date().getTime();
+					newName = m + '_' + newName;
+					return newName;
+				},
+	            removedfile: function(file) {
+	                var name = file.upload.filename;    
+	                
+	                $.ajax({
+	                    type: 'POST',
+	                    url: 'dropzone/upload.php',
+	                    data: {name: name,request: 2},
+	                    sucess: function(data){
+	                        console.log('success: ' + data);
+	                    }
+	                });
+
+	                var _ref;
+	                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+	            }
+
+	        });
+
+
+
+
+		</script>
+    </body>
+</html>

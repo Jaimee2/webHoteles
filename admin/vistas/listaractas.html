@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+		function alerta(idActa) {
+			var direccion = "index.php?accion=acta&id=2&idacta=";
+			direccion = direccion.concat(idActa);
+		    var opcion = confirm("¿Está seguro de que desea eliminar el comentario?");
+		    if (opcion == true) {
+		        window.location = direccion;
+			} 
+		}
+	</script>
+
+</head>
+
+<body>
+    <p><a href="index.php?accion=acta&id=7" target="_blank">Obtener PDF</a></p>
+	<p><a href="index.php?accion=acta&id=8" target="_blank" download="actas.json">Obtener JSON</a></p>
+    <table border="1">
+		<tr>
+			<th>ID</th>
+			<th>Código Postal</th>
+			<th>Pais</th>
+			<th>Titulo</th>
+			<th>Estrellas</th>
+			
+			<th>Modificar</th>
+			<th>Eliminar</th>
+		</tr>
+##Acta##		
+		<tr>
+			<td>##id##</td>
+			<td>##idlugar##</td>
+			<td>##pais##</td>
+			<td>##titulo##</td>
+			<td>##estrellas##</td>
+			
+			<td><a href="index.php?accion=acta&id=3&idacta=##id##">Modificar</a></td>
+<!-- <td><a id="eliminar" href="index.php?accion=acta&id=8&idacta=##idActa##">Eliminar</a></td> -->
+			<td><a id="eliminar" href="#" onclick="alerta(##id##);return false;">Eliminar</a></td>
+		</tr>
+##Acta##		
+	</table>
+	<br>
+	<a href="index.php">Volver</a>
+
+
+</body>
+</html>
