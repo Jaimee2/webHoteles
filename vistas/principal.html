@@ -5,80 +5,217 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-
+        <link href="css/cabecera.css" rel="stylesheet" type="text/css">
+        <link href="css/buscador.css" rel="stylesheet" type="text/css">
+        
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <title>Inicio</title>
-        <style>/*
-                    
-                ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
+
+
+        <script>
+
+            function Buscar(){
+
+                var idpais = document.getElementById("buscarpais").value;
+                var puntuacion = document.getElementById("buscarpuntuacion").value;
+                var texto = document.getElementById("buscartexto").value;
+
+                $(document).ready(
+                    function (){
+                        $.ajax({
+                                type:"GET",
+                                url : "index.php?accion=acta&id=6&idpais=" + idpais
+                                         +"&puntuacion=" + puntuacion
+                                         +"&texto=" + texto,
+                                dataType: "html",
+                                success: function(response) {
+                                
+                                    console.log(response);
+                                        $("div#busqueda").html(response);
+                                },
+                                error: function() {
+                                    console.log("No se ha podido obtener la información");
+                                }
+                        });
+                    });
             }
 
-            li {
-                float: left;
-            }
+        </script>
 
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
 
-            /* Change the link color to #111 (black) on hover */
-           /* li a:hover {
-                background-color: rgb(64, 165, 25);
-            }*/
-        </style>
+
+
+
+        
     </head>
     <body>
+       
         <!--Cabecera-->
-        <!--<header>
-            <section class="wrapper">
-                <nav>
-                    <ul>
-                        <li><a href="index.php?accion=principal&id=1">Inicio</a></li>
-                        <li><a href="##direccionOp1##">##op1##</a> </li>
-                        <li><a href="##direccionOp2##">##op2##</a></li>
-                        ##op3##
-                        ##op4##
-                    </ul>
-                </nav>
-            </section>
-        </header>-->
+        <header class="header">
+            <a href="index.php?accion=principal&id=1"><img class="header__img" src="iconos/iconoHotel.png" alt="Platzi Video"></a>
+            <div class="header__ul1">
+                <ul>
+                    <li><a href="##direccionOp3##">##op3##</a> </li>
+                </ul>
+            </div>
+        
+            <div class="header__menu">
+                
+              <div class="header__menu--profile">
+                <img src="iconos/iconoUsuario.png" alt="User">
+                <p>##nick##</p>
+              </div>
+              <div class="header__menu__ul">
+                <ul>
+                    <li><a href="##direccionOp1##">##op1##</a> </li>
+                    
+                    <li><a href="##direccionOp2##">##op2##</a> </li>
+                    <li><a href="##direccionOp4##">##op4##</a></li>
+                </ul>
+            </div>
+            </div>
+          </header>
+          
 
-        <!-- Image and text -->
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-        <img src="iconos/iconoHotel.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Reseñas de Hoteles
-        </a>
-        <a class="nav-item nav-link active" href="#">Inicio</a>
-        <a class="nav-item nav-link" href="#">Features</a>
-        <a class="nav-item nav-link" href="#">Pricing</a>
-        <a class="nav-item nav-link " href="#">Disabled</a>
-    </nav>
+          <!--Seccion seimple-->
+          <section class="jumbotron text-center">
+            <div class="container">
+              <h1 class="jumbotron-heading">Bienvenido a la web de Reseñas de hoteles</h1>
+            
+              
+              <p class="lead text-muted">A continuacion, se muestran todas las reseñas de los hoteles visitados por los usuarios.</p>
+              
+            </div>
+          </section>
 
         <!--Lista de reseñas-->
-        <h1>Inicio</h1>
-        <p>Bienvenido a la web de Reseñas de hoteles</p>
-        <h2>Últimas reseñas</h2>
-        <p>A continuacion, se muestran todas las reseñas de los hoteles visitados por los usuarios.</p>
-        <hr>
-        ##Acta##
         
-        <h2>##tituloActa##</h2>
-        <h3>##pais##</h3>
-        <p>Puntuación: ##estrellas##</p>
-        <p>##foto##</p>
-        <p>Para saber más: <a href="index.php?accion=acta&id=3&idacta=##idActa##">LEER</a></p>
-        <hr>
-        ##Acta##
-        <script src="bootstrap/jss/bootstrap.min.js"></script>
+       
+        </div>
+      
+       
+<!--
+        <h1>Buscador</h1>
+        
+            <label for="buscarpais">Escoger pais:</label>
+            <select name="pais" id="buscarpais">
+                <option value="0">Todos los paises</option>
+               cuidado aqui
+                <option value="##idpais##">##pais##</option>
+                cuidado aqui
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+            <label for="buscarpais">Escoger puntuacion:</label>
+            <select name="puntuacion" id="buscarpuntuacion">
+                <option value="0">Todas las puntuaciones</option>
+                ##filapuntuacion##
+                <option value="##puntuacion##">##puntuacion##</option>
+                ##filapuntuacion##
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <input type="text" id="buscartexto" class="buscartexto" value="palabra clave en el titulo"
+            onfocus="this.value=''">
+           
+			<input type="button" value="Buscar" onclick="Buscar();">
+            
+        
+        <hr>
+        
+-->
+             <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></script>
+<!-- font awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<section class="search-sec">
+    <div class="container">
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" id="buscartexto" class="form-control search-slt" placeholder="palabra clave en el titulo">
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="buscarpais">
+                                <option value="0">Todos los paises</option>
+                                    ##filapais##
+                                    <option value="##idpais##">##pais##</option>
+                                    ##filapais##
+                            </select>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="buscarpuntuacion">
+                                <option value="0">Todas las puntuaciones</option>
+                                <!--                               4 stars and up -->
+                                <option value="5">
+                                    <p>&#9733; &#9733; &#9733; &#9733; &#9733;</p>
+                                  </option>
+                                <!--                               4 stars and up -->
+                                <option value="4">
+                                  <p>&#9733; &#9733; &#9733; &#9733; &#x2606;</p>
+                                </option>
+                                <!--                               3 stars and up -->
+                                <option value="3">
+                                    <p>&#9733; &#9733; &#9733; &#x2606; &#x2606;</p>
+                                </option>
+                                <!--                               2 stars and up -->
+                                <option value="2">
+                                    <p>&#9733; &#9733; &#x2606; &#x2606; &#x2606;</p>
+                                </option>
+                                <!--                               1 star and up -->
+                                <option value="1">
+                                    <p>&#9733; &#x2606; &#x2606; &#x2606; &#x2606;</p>
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" class="btn btn-danger wrn-btn" onclick="Buscar();"> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+        <hr>
+        
+
+
+       
+
+        <!-- First Row [Prosucts]-->
+
+
+    <div class="busqueda" id="busqueda">
+        <div class="row pb-5 mb-4">
+            ##Acta##
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <!-- Card-->
+                <div class="card rounded shadow-sm border-2">
+                    <div class="card-body p-4"><img src="##foto##" alt="" class="img-fluid d-block mx-auto mb-3" width="200" height="200">
+                        <h5> <a href="index.php?accion=acta&id=3&idacta=##idActa##" class="text-dark">
+                        ##tituloActa##</a></h5>
+                        <p class="small text-muted font-italic">##pais##</p>
+                        <ul class="list-inline small">
+                        ##estrellas##
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            ##Acta##
+        </div>
+    </div>
+    <script src="bootstrap/jss/bootstrap.min.js"></script>
     </body>
 </html>

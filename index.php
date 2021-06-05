@@ -18,6 +18,8 @@ if (isset($_GET["accion"])){
 
 }
 
+
+
 /*************************
  * accion = principal
  * id:
@@ -27,7 +29,7 @@ if ($accion == "principal") {
     switch ($id) {
         case 1:
            //le pasamos existencia de usuario, actas,fotos de las actas
-            vMostrarPrincipal(mIniciadoYExisteBD(),mCogerActas(),mCogerFotosActa());
+            vMostrarPrincipal(mIniciadoYExisteBD(),mCogerActas(),mCogerFotosActa(),mCogerPaises());
             break;
     }
 }
@@ -102,6 +104,10 @@ if ($accion == "acta") {
         case 5:
             //borrar comentario
             vMostrarResultadoComentarioEliminacion(mBorrarComentario(), isset($_SESSION["idusuario"]),  mLeerActa($_GET["idacta"]), mLeerComentarios($_GET["idacta"]), mCargarFotosActa($_GET["idacta"]));
+            break;
+        case 6:
+            //busqueda
+            vMostrarBusqueda(mRealizarBusquedaPais(),mCogerFotosActa());
             break;
         }
 }

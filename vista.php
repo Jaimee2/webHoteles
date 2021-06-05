@@ -1,7 +1,7 @@
 <?php
 
     //funcion que muestra la pagina de inicio pagina de inicio
-    function vMostrarPrincipal($usuarioIniciado,$acta,$fotosActa){
+    function vMostrarPrincipal($usuarioIniciado,$acta,$fotosActa,$Rpaises){
         $pagina = file_get_contents("vistas/principal.html");
         
         if($usuarioIniciado){
@@ -16,6 +16,14 @@
 			$opcion4 = '<li><a href="index.php?accion=usuario&id=6">Información usuario</a></li>';
 			$pagina = str_replace("##op3##", $opcion3, $pagina);
 			$pagina = str_replace("##op4##", $opcion4, $pagina);
+			$nick = $_SESSION['nick'];
+	
+			$pagina = str_replace("##nick##", $nick, $pagina);
+
+			
+
+
+
 
         }else{
             $pagina = str_replace("##direccionOp1##","index.php?accion=usuario&id=3",$pagina);
@@ -27,7 +35,35 @@
 			$opcion4 = '';
 			$pagina = str_replace("##op3##", $opcion3, $pagina);
 			$pagina = str_replace("##op4##", $opcion4, $pagina);
+			
+			$nick = "Usuario no iniciado";
+	
+			$pagina = str_replace("##nick##", $nick, $pagina);
         }
+
+
+		//buscador----------
+			//select pais
+			$trozosfilapais = explode("##filapais##", $pagina);
+			$cuerpoPais="";
+			while ($paises = $Rpaises->fetch_assoc()){
+				$aux = $trozosfilapais[1];
+
+				$aux = str_replace("##idpais##", $paises["idpais"], $aux);
+				$aux = str_replace("##pais##", $paises["nombre"], $aux);
+			
+				$cuerpoPais .= $aux;
+			}
+
+			$pagina = $trozosfilapais[0] .$cuerpoPais . $trozosfilapais[2];
+
+			
+
+			//-----------------
+
+
+
+
 		//mostramos un listado de las reseñas existentes
         vMostrarActasInicio($pagina,$acta, $fotosActa);
 
@@ -37,6 +73,7 @@
 	//Funcion que muestra las reseñas de hoteles de forma resumida en la pagina principal
     function vMostrarActasInicio($pagina, $actas, $fotosActa){
         // Muestra las actas en la página
+		
 		$trozos = explode("##Acta##", $pagina);
 
 		$aux = "";
@@ -48,20 +85,139 @@
 			$aux = str_replace("##pais##", $datos["nombre"], $aux);
 			$aux = str_replace("##tituloActa##", $datos["titulo"], $aux);
 			
-			$aux = str_replace("##estrellas##", $datos["puntuacion"], $aux);
+			if($datos["puntuacion"] == 1 ){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+			}else if($datos["puntuacion"] == 2){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+
+			}else if($datos["puntuacion"] == 3){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+			}else if($datos["puntuacion"] == 4){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+			}else if($datos["puntuacion"] == 5){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>'
+									, $aux);
+			}
+			
 			// CAMBIAR EL MOSTRAR ACTA EN OTRA VENTANA
 			$aux = str_replace("##idActa##", $datos["idacta"], $aux);//pone el idacta en la url
 			if (!is_null($foto['ruta'])){
 				
-				$aux = str_replace("##foto##", 	"<img src=" . $foto['ruta'] . " width='15%''>" , $aux);
+				$aux = str_replace("##foto##", $foto['ruta'], $aux);
 			}else{ 
-				$aux = str_replace("##foto##", 	"No tiene foto" , $aux);
+				$aux = str_replace("##foto##", 	"fotos/monumento.png" , $aux);
 			}
 			$cuerpo .= $aux;
 		}
 
 		echo $trozos[0] . $cuerpo . $trozos[2];
 	}
+
+
+
+	function vMostrarBusqueda($actas, $fotosActa){
+		  // Muestra las actas en la página principal despues de una busqueda
+		
+		$pagina = file_get_contents("vistas/mostrarActasPrincipal.html");
+		 
+		$trozos = explode("##Acta##", $pagina);
+
+		$aux = "";
+		$cuerpo = "";
+		while ($datos = $actas->fetch_assoc()) {
+			$foto = $fotosActa->fetch_assoc();
+			$aux = $trozos[1];
+			//$aux = str_replace("##lugar##", "$datos["nombrelugar"]", $aux);
+			$aux = str_replace("##pais##", $datos["nombre"], $aux);
+			$aux = str_replace("##tituloActa##", $datos["titulo"], $aux);
+			
+			if($datos["puntuacion"] == 1 ){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+			}else if($datos["puntuacion"] == 2){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+
+			}else if($datos["puntuacion"] == 3){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+			}else if($datos["puntuacion"] == 4){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+									, $aux);
+			}else if($datos["puntuacion"] == 5){
+				$aux = str_replace("##estrellas##",
+									'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+									<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>'
+									, $aux);
+			}
+			
+			// CAMBIAR EL MOSTRAR ACTA EN OTRA VENTANA
+			$aux = str_replace("##idActa##", $datos["idacta"], $aux);//pone el idacta en la url
+			if (!is_null($foto['ruta'])){
+				
+				$aux = str_replace("##foto##", $foto['ruta'], $aux);
+			}else{ 
+				$aux = str_replace("##foto##", 	"fotos/monumento.png" , $aux);
+			}
+			$cuerpo .= $aux;
+		}
+	  
+		echo $trozos[0] . $cuerpo . $trozos[2];
+	}
+
+	
 
 	//Funcion que muestra la vista para reistrar un nuevo usario
     function vMostrarRegistrarUsuario(){

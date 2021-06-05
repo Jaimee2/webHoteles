@@ -5,25 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	<link rel="stylesheet" href="css/login.css">
+	
 </head>
 <body>
-    <h1>Iniciar Sesion</h1>
-	
-	<form action="index.php" method="post">
+   
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+	<br><br><br><br><br><br>
+	<form method="post" action="index.php">
+		<div class="box">
+			<h1>Iniciar Sesion</h1>
+				
+			<input type="email" id="correo" class="email" name="correo" maxlength="50" required value="correo" onfocus="this.value=''"><br/>
+			<input type="password" id="clave" class="email" name="clave" minlength="4" maxlength="15" required value="contraseña" onfocus="this.value=''"><br/>
+			 
+			
 
-		<label for="correo">Correo: </label>
-		<input type="email" id="correo" name="correo" maxlength="50" required><br/>
-		<label for="clave" required>Contraseña: </label>
-		<input type="password" id="clave" name="clave" minlength="4" maxlength="15" required><br/>
-		<!--Flujo: accion: usuario, id:4 -->
-        <input type="hidden" name="accion" value="usuario">
-		<input type="hidden" name="id" value="4">
+			<!--Flujo: accion: usuario, id:4 -->
+			<input type="hidden" name="accion" value="usuario">
+			<input type="hidden" name="id" value="4">
+			
+			
+			
+			<input type="submit" class="btn" value="Enviar">
+			<input type="reset" class="btn2" value="Borrar">
+
+			
 		
-        <input type="submit" value="Enviar">
-		<input type="reset" value="Borrar">
+		</div> <!-- End Box -->
+	
 	</form>
-
 	<a href="index.php">Volver</a>
-    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+
 </body>
 </html>
+
+
+

@@ -376,7 +376,6 @@ function mCambiarInformacionUsuario() {
         return -1;
 }
 
-
 function mCogerPaises(){
     $con = conexion();
     $consulta = "SELECT idpais, nombre
@@ -384,4 +383,78 @@ function mCogerPaises(){
     $listaPaises = $con->query($consulta);
     return $listaPaises;
 }
+
+function mRealizarBusquedaPais() {
+    $con = conexion();
+    $idpais = $_GET['idpais'];
+    $puntuacion =  $_GET['puntuacion'];
+    $texto = $_GET['texto'];
+    
+    if ($idpais == '0' && $puntuacion == '0' && $texto ==""){
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    ";
+    }else if ($idpais != '0' && $puntuacion == '0' && $texto ==""){
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    and final_paises.idpais = '$idpais'";
+    }else if ($idpais == '0' && $puntuacion != '0' && $texto ==""){
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    and final_actas.puntuacion = $puntuacion";
+    }else if ($idpais != '0' && $puntuacion != '0'&& $texto ==""){
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    and final_paises.idpais = '$idpais'
+                    and final_actas.puntuacion = '$puntuacion'";
+
+    }elseif($idpais != '0' && $puntuacion != '0' && $texto !=""){
+       
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    and final_paises.idpais = '$idpais'
+                    and final_actas.puntuacion = '$puntuacion'
+                    and final_actas.titulo like '%$texto%'";
+    }elseif($idpais == '0' && $puntuacion != '0' && $texto !=""){
+       
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    
+                    and final_actas.puntuacion = '$puntuacion'
+                    and final_actas.titulo like '%$texto%'";
+    }elseif($idpais != '0' && $puntuacion == '0' && $texto !=""){
+       
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    and final_paises.idpais = '$idpais'
+                    
+                    and final_actas.titulo like '%$texto%'";
+    }elseif($idpais == '0' && $puntuacion == '0' && $texto !=""){
+       
+        $consulta = "SELECT * 
+                    FROM final_actas,final_paises
+                    WHERE final_actas.idpais = final_paises.idpais
+                    
+                    
+                    and final_actas.titulo like '%$texto%'";
+    }else{
+        echo "no entro en nigun if ";
+    }
+    
+    $resultado = $con->query($consulta);
+    return $resultado;		
+}
+
+
+
+
+
+
 ?>
