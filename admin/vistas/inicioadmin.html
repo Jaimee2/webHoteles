@@ -4,23 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Admin</title>
+    <link rel="stylesheet" href="css/login.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+
+	<meta http-equiv="Expires" content="0">
+  <meta http-equiv="Last-Modified" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+
+  
+	<title>Inicio Admin</title>
 </head>
 <body>
-    <h1>Iniciar sesión Administrador</h1>
-	
-	<form action="index.php" method="post">
-		<label for="admin">Administrador : </label>
-		<input type="text" id="admin" name="admin" maxlength="50" required><br/>
-		<label for="clave" required>Contraseña : </label>
-		<input type="password" id="clave" name="clave" minlength="4" maxlength="15" required><br/>
-		
-        <input type="hidden" name="accion" value="principal">
-		<input type="hidden" name="id" value="3">
-		
-        <input type="submit" value="Enviar">
-		<input type="reset" value="Borrar">
-	</form>
     
+	<br><br><br><br><br>
+	<form method="post" action="index.php">
+		<div class="box">
+			<h1>Iniciar sesión Administrador</h1>
+				
+			<input type="text" id="admin" class="email" name="admin" maxlength="50" required value="Usuario" onfocus="this.value=''"><br/>
+			<input type="password" id="clave" class="email" name="clave" minlength="4" maxlength="15" required value="contraseña" onfocus="this.value=''"><br/>
+			 
+			<input type="hidden" name="accion" value="principal">
+			<input type="hidden" name="id" value="3">
+			
+			
+			<input type="submit" class="btn" value="Enviar">
+			<input type="reset" class="btn2" value="Borrar">
+
+		</div> <!-- End Box -->
+	
+	</form>
 </body>
 </html>

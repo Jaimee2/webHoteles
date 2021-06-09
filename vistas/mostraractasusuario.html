@@ -1,0 +1,133 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+        <link href="css/navBar.css" rel="stylesheet" type="text/css">
+        <link href="css/buscador.css" rel="stylesheet" type="text/css">
+        
+        <!-- Libreria de iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Reseñas usuario</title>
+
+    </head>
+    <body> 
+
+
+        <nav class="cabecera">
+             
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                <button class="navbar-toggler" type="button" data-target="#navigation"> <span class="navbar-toggler-icon"></span> </button>
+                
+                <div class="collapse navbar-collapse ">
+            
+                    <ul class="navbar-nav">
+            
+                        <li class="nav-item"> <a href="index.php?accion=principal&id=1" class="nav-link"> Home </a> </li>
+                        <li class="nav-item active"> <a href="##direccionOp3##" class="nav-link"> ##op3## </a> </li>
+                        <li class="nav-item"> <a href="##direccionOp1##" class="nav-link"> ##op1## </a> </li>
+                        
+                       
+                    </ul>
+                    
+                </div>
+                <div class=" topnav-right mx-5">
+                    <ul class="navbar-nav mx-5">
+                        <li class="nav-item   active dropdown mx-5">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ##nick##
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="##direccionOp2##">##op2##</a>
+                              <a class="dropdown-item" href="##direccionOp4##">##op4##</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </li>
+                    </ul>
+                    
+                </div>
+            </nav>
+         </nav>
+
+
+          <!--Seccion seimple-->
+          <section class="jumbotron text-center pb-4 pt-4">
+            <div class="container">
+              <h1 class="jumbotron-heading">Reseñas del usuario</h1>
+            
+              
+              <p class="lead text-muted"></p>
+              
+            </div>
+          </section>
+        
+       
+    
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pais</th>
+                                <th>Titulo</th>
+                                <th>Estrellas</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            ##Acta##		
+                            <tr>
+                                <td>##pais##</td>
+                                <td>##titulo##</td>
+                                <td>##estrellas##</td>
+                                <td><a href="index.php?accion=acta&id=8&idacta=##idActa##">Modificar</a></td>
+                    <!-- <td><a id="eliminar" href="index.php?accion=acta&id=8&idacta=##idActa##">Eliminar</a></td> -->
+                                <td><a id="eliminar" href="#" onclick="alerta(##idActa##);return false;">Eliminar</a></td>
+                            </tr>
+                    ##Acta##
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+      
+
+    
+    
+        <a class="btn btn-light" href="index.php" role="button">volver</a>
+    </div>
+
+       
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function alerta(idActa) {
+            var direccion = "index.php?accion=acta&id=10&idacta=";
+            direccion = direccion.concat(idActa);
+            var opcion = confirm("¿Está seguro de que desea eliminar el comentario?");
+            if (opcion == true) {
+                window.location = direccion;
+            } 
+        }
+    </script>
+    
+    
+
+
+
+
+   
+    </body>
+ </html>

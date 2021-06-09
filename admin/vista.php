@@ -61,11 +61,12 @@ function vCogerTablaActasHTML($actas) {
     while ($acta = $actas->fetch_assoc()) {
         $aux = $trozos[1];
         $aux = str_replace("##id##", $acta["idacta"], $aux);
-       // $aux = str_replace("##lugar##", $acta["nombrelugar"], $aux);
-        //$aux = str_replace("##ciudad##", $acta["nombreciudad"], $aux);
+        $aux = str_replace("##lugar##", $acta["idlugar"], $aux);
+        $aux = str_replace("##pais##", $acta["nombre"], $aux);
         $aux = str_replace("##titulo##", $acta["titulo"], $aux);
         $aux = str_replace("##estrellas##", $acta["puntuacion"], $aux);
-        //$aux = str_replace("##nick##", $acta["nick"], $aux);
+
+        $aux = str_replace("##nick##", $acta["nick"], $aux);
         $cuerpo .= $aux;
     }
     return $trozos[0] . $cuerpo . $trozos[2];
@@ -192,4 +193,28 @@ function vCogerTablaUsuariosHTML($usuarios) {
     }
     return $trozos[0] . $cuerpo . $trozos[2];
 }
+
+
+
+
+
+
+function vMostrarImportarUsuariosCSV(){
+
+    $cadena = file_get_contents("vistas/csvUsuarios.html");
+
+    echo $cadena;
+}
+
+
+
+    function vMostrarResultadoImportarUsuariosCSV($resultado){
+        if ($resultado) {
+            header('location: index.php?accion=usuario&id=1');
+        } else {
+            
+            vMostrarMensaje("Error al insertar csv", "Intentelo de nuevo");
+            echo $resultado;
+        }
+    }
 ?>

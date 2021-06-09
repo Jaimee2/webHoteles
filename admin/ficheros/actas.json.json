@@ -1,0 +1,20 @@
+[
+    {
+        "idacta": "74",
+        "titulo": "Hotel NH Madrid",
+        "puntuacion": "5",
+        "descripcion": "hola esto es un hotle muy chuli que me gusta mucho porque tiene piscina.",
+        "idlugar": "31007",
+        "idusuario": "12",
+        "fecha_creacion": "2021-06-08 23:55:27"
+    },
+    {
+        "idacta": "96",
+        "titulo": "Hotel Condeestable",
+        "puntuacion": "4",
+        "descripcion": "tekekek",
+        "idlugar": "23006",
+        "idusuario": "12",
+        "fecha_creacion": "2021-06-09 21:10:26"
+    }
+]

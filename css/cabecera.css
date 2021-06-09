@@ -19,8 +19,8 @@
     margin-left: 10px;
   }
   .header__menu {
-    margin-right: 10px;
-    padding: 20px;
+    margin-right: 0px;
+    padding: 10px;
   }
   .header__menu__ul ul {
     display: none;
@@ -37,7 +37,7 @@
     
   }
   .header__menu__ul li {
-    margin:10px 0px;
+    margin:0px 0px;
    
   }
   .header__menu__ul li a {
@@ -48,13 +48,13 @@
     text-decoration: underline;        
   }
   .header__menu--profile {
-    margin-right: 29px;
+    margin-right: 0px;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
   .header__menu--profile img {
-    margin-right: 8px;
+    margin-right: 0px;
     width: 40px;
   }
   .header__menu--profile p {
@@ -84,7 +84,14 @@
 
   .jumbotron {
     background-color: #ffeda3;
+
   }
+
+  
+  
+
+
+
 
 
 

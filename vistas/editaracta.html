@@ -1,0 +1,147 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link href="css/navBar.css" rel="stylesheet" type="text/css">
+
+        <title>Editar reseña</title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        
+    </head>
+    <body> 
+    
+
+
+        <nav class="cabecera">
+             
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                <button class="navbar-toggler" type="button" data-target="#navigation"> <span class="navbar-toggler-icon"></span> </button>
+                
+                <div class="collapse navbar-collapse ">
+            
+                    <ul class="navbar-nav">
+            
+                        <li class="nav-item"> <a href="index.php?accion=principal&id=1" class="nav-link"> Home </a> </li>
+                        <li class="nav-item active"> <a href="##direccionOp3##" class="nav-link"> ##op3## </a> </li>
+                        <li class="nav-item "> <a href="##direccionOp1##" class="nav-link"> ##op1## </a> </li>
+                        
+                       
+                    </ul>
+                    
+                </div>
+                <div class=" topnav-right mx-5">
+                    <ul class="navbar-nav mx-5">
+                        <li class="nav-item   active dropdown mx-5">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ##nick##
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="##direccionOp2##">##op2##</a>
+                              <a class="dropdown-item" href="##direccionOp4##">##op4##</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </li>
+                    </ul>
+                    
+                </div>
+            </nav>
+         </nav>
+
+
+
+
+        <div class="container text-center mb-5 mt-2">
+            <h3>Editar reseña</h3>
+            <p>Introduzca la información necesaria para crear la reseña</p>
+            <form action="index.php" method="post">
+
+            <div class="row">
+              <div class="col">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" placeholder=" ##titulo##" id="titulo" name="titulo" disabled>
+              </div>
+              <div class="col">
+
+                <label for="estrellas">Seleccionar el numero de estrellas</label>
+                <select name="puntuacion" id="puntiacion"  class="form-control" disabled>
+                    <option value = "0">##puntuacion##</option>
+                    
+               </select><br/><br/>
+              </div>
+            </div>
+
+
+            <div class="form-group mt-2 text-center">
+                <label for="exampleFormControlTextarea1">Descripción del hotel</label>
+                <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="##descripcion##" required></textarea>
+            </div>
+            <div class="row mt-5">
+                <div class="col">
+                <label for="exampleFormControlTextarea1">Código postal</label>
+                  <input id="idlugar" type="text" class="form-control" placeholder="##lugar##" name="idlugar" disabled>
+                </div>
+                <div class="col">
+                    <label for="exampleFormControlTextarea1">País</label>
+                    <input id="idlugar" type="text" class="form-control" placeholder="##pais##" name="idlugar" disabled>
+                  </div>
+             
+
+              <table class="table table-striped mt-4">
+                <tr>
+                    <th>Foto</th>
+                    <th>Eliminar</th>
+                </tr>
+                ##Foto##		
+                <tr>
+                    <td><img src="##ruta##" width="15%"></td>
+                    <td><a id="eliminar" href="#" onclick="alerta(##idacta##, ##idFoto##, '##ruta##');return false;">Eliminar</a></td>
+                </tr>
+                ##Foto##		
+        
+            </table>
+
+              <input type="hidden" name="accion" value="acta">
+              <input type="hidden" name="id" value="9">
+              <input type="hidden" name="idacta" value="##idacta##">
+              
+            <div class="container mt-2"><input type="submit" value="Enviar" class="btn btn-primary btn-sm ms-1">
+                <input type="reset" value="Borrar" class="btn btn-outline-secondary btn-sm">
+            </div>
+        </div>
+    </div>
+          </form>
+        </div>
+
+    
+        <script type="text/javascript">
+            function alerta(idActa, idFoto, ruta) {
+                var direccion = "index.php?accion=acta&id=11&idacta=";
+                direccion = direccion.concat(idActa);
+                direccion = direccion.concat("&idfoto=");
+                direccion = direccion.concat(idFoto);
+                direccion = direccion.concat("&ruta=");
+                direccion = direccion.concat(ruta);
+                var opcion = confirm("¿Está seguro de que desea eliminar la foto?");
+                if (opcion == true) {
+                    window.location = direccion;
+                } 
+            }
+        </script>
+    
+    
+    
+        <a href="index.php">Volver</a>
+    
+             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </body>
+    </html>
+    

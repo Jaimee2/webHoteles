@@ -1,15 +1,19 @@
 
-    <form action="index.php" method="post">
-		<br/>
-		<label for="comentario">Deje un comentario: </label><br/><br/>
-		<textarea name="comentario" rows="10" cols="40" minlength="1" maxlength="1500" required></textarea><br/>
-
+  
+    </form>
+	<div class="container-fluid">
+	<form action="index.php" method="post">
+		<div class="card p-3 border-blue mt-3"> <span class="dots"></span>                
+			<div class="form"> <input class="form-control" name="comentario" placeholder="Deje un comentario...">
+				<div class="mt-2 d-flex justify-content-end">
+					
+					<input type="reset" value="Borrar" class="btn btn-outline-secondary btn-sm">
+					<input type="submit" value="Enviar" class="btn btn-primary btn-sm ms-1">
+				</div>
+			</div>
+		</div>
 		<input type="hidden" name="idacta" value="##idacta##">
 		<input type="hidden" name="accion" value="acta">
 		<input type="hidden" name="id" value="4">
-
-		<br/>
-		<input type="submit" value="Enviar">
-		<input type="reset" value="Borrar">
-		
-    </form>
+	</form>
+</div>

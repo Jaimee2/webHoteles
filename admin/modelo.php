@@ -69,13 +69,13 @@ function mAdminIniciado() {
 
     function mCogerActas() {
         $con = conexion();
-        $consulta = "Select *
-                        from final_actas,final_paises
-						where final_actas.idpais = final_paises.idpais
-                        ORDER BY fecha_creacion DESC";
+        $consulta = "Select * from final_actas,final_paises,final_usuarios where final_actas.idpais = final_paises.idpais and final_usuarios.idusuario = final_actas.idusuario ORDER BY fecha_creacion DESC";
         $listaActas = $con->query($consulta);
         return $listaActas;
     }
+
+	
+    
 
     function mCargarFotosActa($idActa) {
 		$con = conexion();
@@ -175,6 +175,47 @@ function mAdminIniciado() {
 	    }
 	    $json = json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 		return $json;
+	}
+
+
+
+	function mImportarUsuariosCSV(){
+		
+		
+		
+		
+		//si existe fichero entramos
+		if (isset($_POST['submit'])) 
+		{
+			$con = conexion();
+			
+			$archivo = fopen($_FILES['filename']['tmp_name'], "r");
+
+			//Lo recorremos
+			while (($datos = fgetcsv($archivo,1000,";")) == true) {
+				$num = count($datos);
+				
+				$nick = $datos[0];
+				$nombre = $datos[1];
+				$apellidos = $datos[2];
+				$correo = $datos[3];
+				$contraseña = $datos[4];
+				echo $nick,$nombre,$apellidos,$correo,$contraseña;
+				//obtenemos los datos de la row
+				if($nick != ""){
+					$consulta = "INSERT INTO `final_usuarios`(`nick`, `nombre`, `apellidos`, `correo`, `clave`)
+				 VALUES ('$nick','$nombre','$apellidos','$correo','$contraseña')";
+				
+				$resultado = $con->query($consulta);
+				//
+				}
+				
+
+			}
+			//Cerramos el archivo
+			fclose($archivo);
+			}
+		return $resultado;	
 	}
  
 ?>

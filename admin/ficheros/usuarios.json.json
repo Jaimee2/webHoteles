@@ -1,16 +1,16 @@
 [
     {
-        "idusuario": "10",
-        "nick": "jaime",
-        "nombre": "jaimito",
-        "apellidos": "higueras",
+        "idusuario": "12",
+        "nick": "Jaime",
+        "nombre": "Jaime",
+        "apellidos": "HIgueras",
         "correo": "1234@gmail.com"
     },
     {
-        "idusuario": "11",
-        "nick": "Pablete",
-        "nombre": "pablo",
-        "apellidos": "apellidito",
+        "idusuario": "13",
+        "nick": "Robert",
+        "nombre": "Roberto",
+        "apellidos": "Gonzales",
         "correo": "12345@gmail.com"
     }
 ]

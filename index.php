@@ -81,12 +81,14 @@ if ($accion == "usuario") {
  *      3.Leer mas sobre un acta: Muestra toda la informacion del acta
  *      4.Crea un comentario para una determinada reseña y actualiza la visio de la misma con el comentario añadido
  *      5.Borra un comentario generado por el mismo usuario y actualiza la vision de la reseña con el comentario eliminado
+ *      6.Buscador de reseñas.
+ *      7.Muetra las actas de un usuario en concreto.
  *************************/
 
 if ($accion == "acta") {
     switch ($id) {
         case 1:
-            vMostrarCrearActa();
+            vMostrarCrearActa(mIniciadoYExisteBD());
             break;
         case 2:
             //crear acta
@@ -108,6 +110,21 @@ if ($accion == "acta") {
         case 6:
             //busqueda
             vMostrarBusqueda(mRealizarBusquedaPais(),mCogerFotosActa());
+            break;
+        case 7:
+            vMostrarActasUsuario(mCargarActasUsuario(),mIniciadoYExisteBD());
+            break;
+        case 8:
+            vMostrarEdicionActa(mLeerActa($_GET["idacta"]), mCargarFotosActa($_GET["idacta"]),mIniciadoYExisteBD());
+            break;
+        case 9:
+            vMostrarResultadoActualizacionActa(mActualizarActa());
+            break;
+        case 10:
+            vMostrarEliminarActa(mEliminarActa($_GET["idacta"]), mCargarActasUsuario(),mIniciadoYExisteBD());
+            break;
+        case 11:
+            vMostrarResultadoBorradoFotoActa(mBorrarFotoActa($_GET["idacta"], $_GET["idfoto"], $_GET["ruta"]));
             break;
         }
 }

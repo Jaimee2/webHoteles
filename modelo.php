@@ -170,8 +170,8 @@ function mCrearActa(){
                                 WHERE titulo = $titulo AND idusuario = $idusuario";
 		
 		$resultado =  $con->query($comprobarDuplicidad);
-       
-		if ($resultado->num_rows >0) {
+        if ( !empty($resultado->num_rows) && $resultado->num_rows > 0)
+		 {
             
 			mEliminarFotosSubiendo($idusuario);
 			return -1; 
@@ -186,7 +186,7 @@ function mCrearActa(){
         }
     
         // Ponemos las fotos
-		mFotosActa($idlugar, $idusuario, $con);
+		mFotosActa($idlugar,$titulo ,$idusuario, $con);
 		return 0;
 }
 
@@ -224,18 +224,20 @@ function mGuardarFotoSubiendo($nombre, $ruta) {
 
 }
 
-function mFotosActa($idlugar, $idUsuario, $con) {
-    echo "entro";
+function mFotosActa($idlugar,$titulo,$idUsuario, $con) {
+    
 
     $consulta = "SELECT idfoto, nombre, ruta, idusuario 
                         FROM final_fotos_subiendo 
                         WHERE idusuario = '$idUsuario'
                         ORDER BY idfoto DESC";
     $consultaIDActa = "SELECT idacta FROM final_actas 
-                        WHERE idlugar = '$idlugar' AND idusuario = '$idUsuario'";
+                        WHERE idlugar = '$idlugar' AND idusuario = '$idUsuario'
+                                and titulo = '$titulo'";
     $idActa = $con->query($consultaIDActa);
     $idActa = $idActa->fetch_assoc();
-    $idActa = $idActa['idacta'];
+    $idActa  = $idActa['idacta'];
+    
     // Fotos máximas que puede haber en una reseña
     $fotos = $con->query($consulta);
     $i = 5;
@@ -286,12 +288,11 @@ function mCogerFotosActa(){
 //lectura de un acta a partir de u idacta
 function mLeerActa($idActa) {
     $con = conexion();
-    /*$consulta = "SELECT final_actas.idacta, titulo, puntuacion, descripcion, final_actas.idlugar, final_actas.idusuario, final_lugares.nombre as nombrelugar, final_ciudades.nombre as nombreciudad, final_usuarios.nick
-                 FROM final_actas, final_lugares, final_ciudades, final_usuarios WHERE final_actas.idlugar = final_lugares.idlugar AND final_lugares.idciudad = final_ciudades.idciudad AND final_usuarios.idusuario = final_actas.idusuario AND final_actas.idacta = $idActa;";*/
     
-    $consulta = "SELECT *
-                 FROM final_actas,final_usuarios
-                 WHERE final_actas.idacta = $idActa and final_usuarios.idusuario = final_actas.idusuario " ;
+    $consulta = "SELECT *,final_paises.nombre as nombrepais
+                 FROM final_actas,final_usuarios,final_paises
+                 WHERE final_actas.idacta = $idActa and final_usuarios.idusuario = final_actas.idusuario
+                        and final_actas.idpais = final_paises.idpais" ;
     
     $datos = $con->query($consulta);
     $acta = $datos->fetch_assoc();
@@ -301,7 +302,8 @@ function mLeerActa($idActa) {
 function mCargarFotosActa($idActa) {
     $con = conexion();
     $consulta = "SELECT idfoto, nombre, ruta, idacta 
-                    FROM final_fotos WHERE idacta = '$idActa'";
+                    FROM final_fotos WHERE idacta = '$idActa'
+                    order by idfoto desc";
     return $con->query($consulta);
 }
 //registra un comentario en la bbdd
@@ -450,6 +452,54 @@ function mRealizarBusquedaPais() {
     
     $resultado = $con->query($consulta);
     return $resultado;		
+}
+
+
+
+
+function mCargarActasUsuario() {
+    mIniciadoYExisteBD();
+    $con = conexion();
+    $consulta = "SELECT *
+                FROM final_actas,final_paises
+                where final_actas.idpais = final_paises.idpais
+                and final_actas.idusuario =  " .$_SESSION['idusuario']. "
+                ORDER BY fecha_creacion desc";
+    return $con->query($consulta);
+}
+
+
+function mActualizarActa() {
+    $con = conexion();
+    $descripcion = $_POST["descripcion"];
+    $idActa = $_POST["idacta"];
+    $actualizarActa = "UPDATE final_actas
+                         SET descripcion = '$descripcion'
+                         WHERE idacta = $idActa";
+    return $con->query($actualizarActa);
+}
+
+function mEliminarActa($idActa) {
+    mIniciadoYExisteBD();
+    $con = conexion();
+    $eliminarFotosActa = "SELECT idfoto, nombre, ruta, idacta
+                             FROM final_fotos
+                             WHERE idacta = '$idActa'";
+    $fotosEliminar = $con->query($eliminarFotosActa);
+    mEliminarFotos($fotosEliminar);
+    $eliminarActa = "DELETE FROM final_actas WHERE idacta = $idActa";
+    return $con->query($eliminarActa);
+}
+
+
+
+
+function mBorrarFotoActa($idActa, $idFoto, $rutaFoto) {
+    unlink($rutaFoto);
+    $con = conexion();
+    $consulta = "DELETE FROM final_fotos WHERE idfoto = '$idFoto'";
+    $con->query($consulta);
+    return $idActa;
 }
 
 

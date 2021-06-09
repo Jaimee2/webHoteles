@@ -1,10 +1,12 @@
 <?php
 
-    //funcion que muestra la pagina de inicio pagina de inicio
-    function vMostrarPrincipal($usuarioIniciado,$acta,$fotosActa,$Rpaises){
-        $pagina = file_get_contents("vistas/principal.html");
-        
-        if($usuarioIniciado){
+
+
+	function vMostrarCabecera($usuarioIniciado,$vista){
+
+		$pagina = file_get_contents($vista);
+
+		if($usuarioIniciado){
             //implementar despues de generar la bbdd
 			$pagina = str_replace("##direccionOp1##","index.php?accion=acta&id=1",$pagina);
             $pagina = str_replace("##op1##","Crear Reseña",$pagina);
@@ -12,35 +14,53 @@
             $pagina = str_replace("##direccionOp2##","index.php?accion=usuario&id=5",$pagina);
             $pagina = str_replace("##op2##","Cerrar Sesion",$pagina);
 
-			$opcion3 = '<li><a href="index.php?accion=acta&id=6">Ver/Editar Reseñas</a></li>';
-			$opcion4 = '<li><a href="index.php?accion=usuario&id=6">Información usuario</a></li>';
-			$pagina = str_replace("##op3##", $opcion3, $pagina);
-			$pagina = str_replace("##op4##", $opcion4, $pagina);
+			
+			$pagina = str_replace("##direccionOp3##","index.php?accion=acta&id=7",$pagina);
+            $pagina = str_replace("##op3##","Ver/editar Mis Reseñas",$pagina);
+
+			$pagina = str_replace("##direccionOp4##","index.php?accion=usuario&id=6",$pagina);
+            $pagina = str_replace("##op4##","Informacion de usuario",$pagina);
+			
 			$nick = $_SESSION['nick'];
 	
 			$pagina = str_replace("##nick##", $nick, $pagina);
 
-			
-
-
-
-
+		
         }else{
-            $pagina = str_replace("##direccionOp1##","index.php?accion=usuario&id=3",$pagina);
-            $pagina = str_replace("##op1##","Iniciar sesion",$pagina);
+            $pagina = str_replace("##direccionOp2##","index.php?accion=usuario&id=3",$pagina);
+            $pagina = str_replace("##op2##","Iniciar sesion",$pagina);
 
-            $pagina = str_replace("##direccionOp2##","index.php?accion=usuario&id=1",$pagina);
-            $pagina = str_replace("##op2##","Registrarse",$pagina);
+            $pagina = str_replace("##direccionOp4##","index.php?accion=usuario&id=1",$pagina);
+            $pagina = str_replace("##op4##","Registrarse",$pagina);
+			
+			$opcion1 = '';
+			
+			$pagina = str_replace("##op1##", $opcion1, $pagina);
 			$opcion3 = '';
-			$opcion4 = '';
+			
 			$pagina = str_replace("##op3##", $opcion3, $pagina);
-			$pagina = str_replace("##op4##", $opcion4, $pagina);
 			
 			$nick = "Usuario no iniciado";
 	
 			$pagina = str_replace("##nick##", $nick, $pagina);
         }
 
+		return $pagina;
+
+	}
+
+
+
+
+
+    //funcion que muestra la pagina de inicio pagina de inicio
+    function vMostrarPrincipal($usuarioIniciado,$acta,$fotosActa,$Rpaises){
+
+		$vista = "vistas/principal.html";
+        $pagina = file_get_contents($vista);
+        
+        $pagina = vMostrarCabecera($usuarioIniciado,$vista);
+		
 
 		//buscador----------
 			//select pais
@@ -56,18 +76,11 @@
 			}
 
 			$pagina = $trozosfilapais[0] .$cuerpoPais . $trozosfilapais[2];
-
-			
-
-			//-----------------
-
-
-
+		//-----------------
 
 		//mostramos un listado de las reseñas existentes
         vMostrarActasInicio($pagina,$acta, $fotosActa);
 
-        //echo $pagina;
     }
 
 	//Funcion que muestra las reseñas de hoteles de forma resumida en la pagina principal
@@ -142,8 +155,6 @@
 		echo $trozos[0] . $cuerpo . $trozos[2];
 	}
 
-
-
 	function vMostrarBusqueda($actas, $fotosActa){
 		  // Muestra las actas en la página principal despues de una busqueda
 		
@@ -217,8 +228,6 @@
 		echo $trozos[0] . $cuerpo . $trozos[2];
 	}
 
-	
-
 	//Funcion que muestra la vista para reistrar un nuevo usario
     function vMostrarRegistrarUsuario(){
         echo file_get_contents("vistas/registrarse.html");
@@ -265,9 +274,14 @@
 			vMostrarMensaje("Inicio Sesión", "El correo o la contraseña son incorrectos");
 	}
 	//Funcion que muestra la vista de crear actas
-function vMostrarCrearActa() {
+function vMostrarCrearActa($usuarioIniciado) {
+
 		//mIniciadoYExisteBD();
-		echo file_get_contents("vistas/crearacta.html");
+		$vista = "vistas/crearacta.html";
+		
+		$pagina = vMostrarCabecera($usuarioIniciado,$vista);
+		
+		echo $pagina;
 	}
 
 function vMostrarResultadoCrearActa($resultado) {
@@ -287,20 +301,74 @@ function vMostrarResultadoCrearActa($resultado) {
 //mostrat acta completa
 //IMPLEMETAR PRIMERO LOS COMENTARIOS
 function vMostrarActa($usuarioIniciado,$acta,$comentarios,$fotos){
-	$pagina = file_get_contents("vistas/mostraracta.html");
+
+	$vista = "vistas/mostraracta.html";
+	//$pagina = file_get_contents($vista);
+
+
+	$pagina = vMostrarCabecera($usuarioIniciado,$vista);
 
 	$trozos = explode("##Comentario##", $pagina);
 
 		$trozos[0] = str_replace("##titulo##", $acta["titulo"], $trozos[0]);
+		$trozos[0] = str_replace("##pais##", $acta["nombre"], $trozos[0]);
+		
 		//$trozos[0] = str_replace("##lugar##", $acta["nombrelugar"], $trozos[0]);
 		//$trozos[0] = str_replace("##ciudad##", $acta["nombreciudad"], $trozos[0]);
-		$trozos[0] = str_replace("##estrellas##", $acta["puntuacion"], $trozos[0]);
+		if($acta["puntuacion"] == 1 ){
+			$trozos[0] = str_replace("##estrellas##",
+								'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+								,  $trozos[0]);
+		}else if($acta["puntuacion"] == 2){
+			$trozos[0] = str_replace("##estrellas##",
+								'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+								,  $trozos[0]);
+
+		}else if($acta["puntuacion"] == 3){
+			$trozos[0] = str_replace("##estrellas##",
+								'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+								,  $trozos[0]);
+		}else if($acta["puntuacion"] == 4){
+			$trozos[0] = str_replace("##estrellas##",
+								'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>'
+								,  $trozos[0]);
+		}else if($acta["puntuacion"] == 5){
+			$trozos[0] = str_replace("##estrellas##",
+								'<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+								<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>'
+								,  $trozos[0]);
+		}else{
+			echo "noenteo";
+		}
+		
+
+
+
 		$trozos[0] = str_replace("##usuario##", $acta["nick"], $trozos[0]);
 		$trozos[0] = str_replace("##descripcion##", $acta["descripcion"], $trozos[0]);
 
 
 		$trozosFoto = explode("##fotos##", $trozos[0]);
-		$cuerpoFotos = vMostrarFotos($fotos, $trozosFoto[1], $trozosFoto[2]);
+		$cuerpoFotos = vMostrarFotos($fotos, $trozosFoto[1], $trozosFoto[0]);
 
 		$cuerpo = vMostrarComentariosActa($comentarios, $trozos[1]);
 
@@ -311,7 +379,6 @@ function vMostrarActa($usuarioIniciado,$acta,$comentarios,$fotos){
 			//si envia el formulario --> accion = acta id = 4
 			echo vMostarFormularioComentarioActa($acta["idacta"]);
 		}
-
 		echo $trozos[2];
 }
 
@@ -325,12 +392,18 @@ function vMostrarComentariosActa($comentarios, $trozo) {
 		$aux = str_replace("##usuarioComentario##", $opinion["nick"], $aux);
 		$aux = str_replace("##opinion##", $opinion["cuerpo"], $aux);
 		$aux = str_replace("##fechaComentario##", $opinion["fecha_creacion"], $aux);
-		if ($opinion["idusuario"] === $_SESSION["idusuario"]) {
-			$opcionEliminar = '<a id="eliminar" href="#" onclick="alerta('.$opinion["idacta"].', '.$opinion["idcomentario"].');">Eliminar</a>';
-			$aux = str_replace("##opcionEliminar##", $opcionEliminar, $aux);
-		} else {
-			$opcionEliminar = '';
-			$aux = str_replace("##opcionEliminar##", $opcionEliminar, $aux);
+		if(isset($_SESSION["idusuario"])){
+			if ($opinion["idusuario"] === $_SESSION["idusuario"]) {
+				$opcionEliminar = '<a id="eliminar" href="#" onclick="alerta('.$opinion["idacta"].', '.$opinion["idcomentario"].');">Eliminar</a>';
+				$aux = str_replace("##opcionEliminar##", $opcionEliminar, $aux);
+			} else {
+				$opcionEliminar = '';
+				$aux = str_replace("##opcionEliminar##", $opcionEliminar, $aux);
+			}
+		}else{
+			 
+				$opcionEliminar = '';
+				$aux = str_replace("##opcionEliminar##", $opcionEliminar, $aux);
 		}
 		$cuerpo .= $aux;
 	}
@@ -423,4 +496,94 @@ function vMostrarSeleccionPaises($resultado) {
 
 	echo $trozos[0] . $cuerpo . $trozos[2];
 }
+
+function vMostrarActasUsuario($actas,$usuarioIniciado) {
+
+	$vista = "vistas/mostraractasusuario.html";
+	$pagina = file_get_contents($vista);
+	//insertamos la cabecera
+	$pagina = vMostrarCabecera($usuarioIniciado,$vista);
+	
+
+	$trozos = explode("##Acta##", $pagina);
+
+	$aux = "";
+	$cuerpo = "";
+	while ($datos = $actas->fetch_assoc()) {
+		$aux = $trozos[1];
+		
+		$aux = str_replace("##pais##", $datos["nombre"], $aux);
+		$aux = str_replace("##titulo##", $datos["titulo"], $aux);
+		$aux = str_replace("##estrellas##", $datos["puntuacion"], $aux);
+		$aux = str_replace("##idActa##", $datos["idacta"], $aux);
+
+		$cuerpo .= $aux;
+	}
+
+	echo $trozos[0] . $cuerpo . $trozos[2];
+
+}
+
+function vMostrarEdicionActa($acta, $fotosActa,$usuarioIniciado) {
+
+	$vista = "vistas/editaracta.html";
+
+	$pagina = vMostrarCabecera($usuarioIniciado,$vista);
+
+	
+
+	$pagina = str_replace("##titulo##", $acta["titulo"], $pagina);
+	
+	$pagina = str_replace("##pais##", $acta["nombre"], $pagina);
+	$pagina = str_replace("##puntuacion##", $acta["puntuacion"], $pagina);
+	$pagina = str_replace("##descripcion##", $acta["descripcion"], $pagina);
+	$pagina = str_replace("##lugar##", $acta["idlugar"], $pagina);
+	
+	$pagina = str_replace("##idacta##", $acta["idacta"], $pagina);
+	$trozos = explode("##Foto##", $pagina);
+	$cuerpo = vMostrarFotosEdicion($fotosActa, $trozos[1]);
+	echo $trozos[0] . $cuerpo . $trozos[2];
+}
+
+
+function vMostrarFotosEdicion($fotosActa, $trozo) {
+	$aux = "";
+	$cuerpo = "";
+	while ($foto = $fotosActa->fetch_assoc()) {
+		$aux = $trozo;
+		$aux = str_replace("##ruta##", $foto["ruta"], $aux);
+		$aux = str_replace("##idFoto##", $foto["idfoto"], $aux);
+
+		$cuerpo .= $aux;
+	}
+	return $cuerpo;
+}
+
+
+function vMostrarResultadoActualizacionActa($resultado) {
+	if ($resultado) {
+		vMostrarMensaje("Éxito al actualizar la reseña", "Se ha actualizado la reseña correctamente");
+	} else {
+		vMostrarMensaje("Error al actualizar la reseña", "Ha habido un error al actualizar la reseña.");
+	}
+}
+
+
+
+function vMostrarEliminarActa($resultado, $actas,$usuarioIniciado) {
+	if ($resultado) {
+		vMostrarActasUsuario($actas,$usuarioIniciado);
+	} else {
+		vMostrarMensaje("Error al eliminar una reseña", "Ha habido un error al eliminar una reseña.");
+	}
+}
+
+
+function vMostrarResultadoBorradoFotoActa($resultado) {
+	if ($resultado > 0)
+		header("location: index.php?accion=acta&id=8&idacta=$resultado");
+	else
+		vMostrarMensaje("Error al eliminar la foto", "Se ha producido un error al eliminar la foto"); 
+} 
+
 ?>

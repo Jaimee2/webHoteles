@@ -5,7 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Crear reseña</title>
+
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link href="css/navBar.css" rel="stylesheet" type="text/css">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
         <link href="dropzone/dropzone.css" type="text/css" rel="stylesheet" />
         <script src="dropzone/dropzone.js"></script>
 
@@ -32,52 +37,114 @@
 
     </head>
     <body>
-        <p id = "primero"></p>
-        <h1>Crear nueva reseña</h1>
-        <p>Introduzca los datos correspondientes a la reseña:</p>
 
-        <form action="index.php" method="post">
-		
-            <label for="titulo">Título: </label>
-            <input type="text" id="titulo" name="titulo" minlength="10" maxlength="50" required>&nbsp;&nbsp;&nbsp;&nbsp;
-    
-            <label for="puntuacion">Estrellas: </label>
-            <select name="puntuacion" id="puntiacion">
-                 <option value="1">1</option>
-                 <option value="2">2</option>
-                 <option value="3">3</option>
-                 <option value="4">4</option>
-                 <option value="5">5</option>
-            </select><br/><br/>
-            
-            <label for="descripcion">Descripción: </label><br/>
-            <textarea name="descripcion" rows="10" cols="40" minlength="25" maxlength="1500" required></textarea><br/>
-            <label for="titulo">codigo Postal: </label>
-            <input type="text" id="idlugar" name="idlugar">
-    
-            <div id="pais"></div>
-            <!--<div id="ciudad"></div>
-            <div id="lugar"></div>
-    
-            <br/>
-    
-            <label for="fotos">Fotos: </label>
-            
-            <div id="dropzoneFrom" class="dropzone">
-    
-            </div> <br/>
-    
-        -->
-            <div id="dropzoneFrom" class="dropzone"></div>
 
-            <input type="hidden" name="accion" value="acta">
-            <input type="hidden" name="id" value="2">
-    
-            <input type="submit" value="Enviar">
-            <input type="reset" value="Borrar">
+
+        <nav class="cabecera">
+             
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                <button class="navbar-toggler" type="button" data-target="#navigation"> <span class="navbar-toggler-icon"></span> </button>
+                
+                <div class="collapse navbar-collapse ">
             
-        </form>
+                    <ul class="navbar-nav">
+            
+                        <li class="nav-item"> <a href="index.php?accion=principal&id=1" class="nav-link"> Home </a> </li>
+                        <li class="nav-item"> <a href="##direccionOp3##" class="nav-link"> ##op3## </a> </li>
+                        <li class="nav-item active"> <a href="##direccionOp1##" class="nav-link"> ##op1## </a> </li>
+                        
+                       
+                    </ul>
+                    
+                </div>
+                <div class=" topnav-right mx-5">
+                    <ul class="navbar-nav mx-5">
+                        <li class="nav-item   active dropdown mx-5">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ##nick##
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="##direccionOp2##">##op2##</a>
+                              <a class="dropdown-item" href="##direccionOp4##">##op4##</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </li>
+                    </ul>
+                    
+                </div>
+            </nav>
+         </nav>
+
+           
+
+        <div class="container  text-center mb-5 mt-2">
+            <div class="card bg-light m-5">
+                
+            <h3 >Crear una nueva reseña</h3>
+            <p>Introduzca los datos correspondientes a la reseña:</p>
+            <form action="index.php" method="post">
+
+            <div class="row m-2">
+              <div class="col">
+                <label for="titulo">Introduzca un título descriptivo del hotel</label>
+                <input type="text" class="form-control" placeholder="Título" id="titulo" name="titulo">
+              </div>
+              <div class="col">
+
+                <label for="estrellas">Seleccionar el numero de estrellas</label>
+                <select name="puntuacion" id="puntiacion"  class="form-control" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+               </select><br/><br/>
+              </div>
+            </div>
+
+
+            <div class="row m-3">
+                <label for="exampleFormControlTextarea1">Descripción del hotel</label>
+                <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="row m-2">
+                <div class="col">
+                <label for="exampleFormControlTextarea1">Código postal</label>
+                  <input id="idlugar" type="text" class="form-control" placeholder="codigo postal" name="idlugar">
+                </div>
+                <div class="col">
+                    <div id="pais"></div>
+                </div>
+              </div>
+
+              <div class="row m-3">
+                <div id="dropzoneFrom" class="dropzone"></div>
+              </div>
+              
+
+              <input type="hidden" name="accion" value="acta">
+              <input type="hidden" name="id" value="2">
+              <div class="row m-3">
+                <div class="container mt-2"><input type="submit" value="Enviar" class="btn btn-primary btn-sm ms-1">
+                    <input type="reset" value="Borrar" class="btn btn-outline-secondary btn-sm"></div>
+              </div>
+            
+          </form>
+            </div>
+            
+        </div>
        
+
+
+
+
+
+         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
         <script type="text/javascript">
     
@@ -118,9 +185,6 @@
 	            }
 
 	        });
-
-
-
 
 		</script>
     </body>

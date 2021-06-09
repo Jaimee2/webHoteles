@@ -4,6 +4,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+        <link href="css/navBar.css" rel="stylesheet" type="text/css">
+        <link href="css/buscador.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/actas.css">
+        <!-- Libreria de iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <title>##titulo##</title>
 
         <style type="text/css">
@@ -17,7 +25,7 @@
 
         <script type="text/javascript">
 
-            window.onload = function() { //tras cargar la página ...
+           /* window.onload = function() { //tras cargar la página ...
                 visor1 = document.getElementById("visor"); //referencia al visor
             }
 
@@ -28,7 +36,7 @@
                 //t = document.images["fotos"+num].alt; //texto de pie de foto
 
                 
-            }
+            }*/
             function alerta(idActa, idComentario) {
                     //pasamos por url el id acta y idcomentario
                     
@@ -40,44 +48,145 @@
                     if (opcion == true) {
                         window.location = direccion;
                     } 
-		        }
+		        }     
         </script>
-    </head>
-    <body>
-        <h1>##titulo##</h1>
-        <p>Puntuación: ##estrellas##</p>
-	    <p>Usuario: ##usuario##</p>
-	    <p>Descripción: ##descripcion##</p>
-
-
-        <p>Fotos: </p>
-        <div id="menu">
-            ##fotos##
-            <img src='##foto##' name='##lugar##' onclick="mifoto('##foto##')"/>
-            ##fotos##
-        </div>
-
-        <div id="principal">
-            <div id="visor">
-                <img src='##fotoPrincipal##' style="width:50%;" name='fotoVisor'/>
-            </div>
-	    </div>
-
-        <hr/>
-        <h2>Comentarios</h2>
-
-        ##Comentario##
-        <h3>##usuarioComentario##</h3>
-        <p>##fechaComentario##</p>
-        <p>##opinion##</p>
-        ##opcionEliminar##
-        ##Comentario##
-
-        <br/>
-        <br/>
-
-        <a href="index.php">Volver</a>
 
         
+    <script type="text/javascript">
+		function cambiarRuta(nuevaruta){
+			document.getElementById('imagenGrande').src=nuevaruta;
+		}
+	</script>
+
+
+    </head>
+    <body>
+        <!--Cabecera-->
+        <nav class="cabecera">
+             
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+                <button class="navbar-toggler" type="button" data-target="#navigation"> <span class="navbar-toggler-icon"></span> </button>
+                
+                <div class="collapse navbar-collapse ">
+            
+                    <ul class="navbar-nav">
+            
+                        <li class="nav-item"> <a href="index.php?accion=principal&id=1" class="nav-link"> Home </a> </li>
+                        <li class="nav-item active"> <a href="##direccionOp3##" class="nav-link"> ##op3## </a> </li>
+                        <li class="nav-item"> <a href="##direccionOp1##" class="nav-link"> ##op1## </a> </li>
+                        
+                       
+                    </ul>
+                    
+                </div>
+                <div class=" topnav-right mx-5">
+                    <ul class="navbar-nav mx-5">
+                        <li class="nav-item   active dropdown mx-5">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ##nick##
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="##direccionOp2##">##op2##</a>
+                              <a class="dropdown-item" href="##direccionOp4##">##op4##</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </li>
+                    </ul>
+                    
+                </div>
+            </nav>
+         </nav>
+
+
+
+         <!--Codigo nuevo-->
+         <div class="container text-center">
+            <div class="card ">
+                <div class="container-fliud">
+                    <div class="wrapper row">
+                        <div class="preview col-md-6">
+                            
+                            <div class="preview-pic tab-content"> <!--Imagne principal-->
+                              <div class="tab-pane  active" id="pic-1"><img id="imagenGrande" src="##fotoPrincipal##" width="250" height="400"/></div>
+                            </div>
+                            <ul class="preview-thumbnail nav nav-tabs">
+
+                                ##fotos##
+                                <li><a onclick="cambiarRuta('##foto##')"><img src="##foto##" width="80" height="80"/></a></li>
+                                ##fotos##
+
+                            </ul>
+                            
+                        </div>
+                        <div class="details col-md-6">
+                            <h2 class="product-title">##titulo##</h2>
+                            <span class="review-no">Valoración del usuario: ##usuario##</span>
+                            <div class="rating">
+                                <div class="stars">
+                                   ##estrellas##
+                                </div>
+                                
+                            </div>
+                            <dt>Description</dt>
+                            <p class="product-description">##descripcion##</p>
+                            <dt>Pais</dt>
+                            <p class="product-description">##pais##</p>
+                            
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Comentarios-->
+            <hr/>
+        </div>
+        <div class="container">
+            <h2>Comentarios</h2>
+
+        
+            <div class="container-fliud mt- mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+
+                        ##Comentario##
+                        <div class="comment-section text-center ">
+                            <div class="card p-3 border-blue"> <span class="dots"></span>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <div class="d-flex flex-row">
+                                        <div class="user-image"> <img src="iconos/iconoUsuario.png" width="35" class="rounded-circle"> </div>
+                                        <div class="d-flex flex-column">
+                                            <h6 class="mb-">##usuarioComentario##</h6>
+                                        </div>
+                                    </div>
+                                    <div> <span>##fechaComentario##</span> </div>
+                                    ##opcionEliminar##
+                                </div>
+                                <p class="content">##opinion##  </div>
+                                    
+                        </div>
+                        ##Comentario##
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+           
+        </div>
+            <a href="index.php">Volver</a>
+   
+
+        
+
+
+         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     </body>
 </html>

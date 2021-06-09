@@ -113,6 +113,13 @@
             case 4:
                 vMostrarJSON(mObtenerUsuariosJSON(), "usuarios.json");
             break;
+            case 5:
+                vMostrarImportarUsuariosCSV();
+            break;
+            case 6:
+                
+                vMostrarResultadoImportarUsuariosCSV(mImportarUsuariosCSV());
+                break;
 
         }
     }
