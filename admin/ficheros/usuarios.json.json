@@ -7,10 +7,31 @@
         "correo": "1234@gmail.com"
     },
     {
-        "idusuario": "13",
-        "nick": "Robert",
-        "nombre": "Roberto",
-        "apellidos": "Gonzales",
-        "correo": "12345@gmail.com"
+        "idusuario": "20",
+        "nick": "﻿jaimee2",
+        "nombre": "jaime",
+        "apellidos": "higueras ",
+        "correo": "4321@gmail.com"
+    },
+    {
+        "idusuario": "24",
+        "nick": "﻿jaimee2",
+        "nombre": "jaime",
+        "apellidos": "higueras ",
+        "correo": "4321@gmail.com"
+    },
+    {
+        "idusuario": "25",
+        "nick": "﻿jaimee2",
+        "nombre": "jaime",
+        "apellidos": "higueras ",
+        "correo": "4321@gmail.com"
+    },
+    {
+        "idusuario": "26",
+        "nick": "﻿jaimee2",
+        "nombre": "jaime",
+        "apellidos": "higueras ",
+        "correo": "4321@gmail.com"
     }
 ]

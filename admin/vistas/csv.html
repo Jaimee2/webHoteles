@@ -70,26 +70,51 @@
 
     <div id="page-wrapper">
         
-        <div class="container-fluid">
+       
+       
+        <div class="container text-center">
             <!-- Page Heading -->
-            
-            <div class="row text-center" id="main" >
-              
+    
                 <div class="col-sm-12 col-md-12 well" id="content">
                    
-                    <h1>Importar csv de usuarios</h1>
-                    <p></p>
+                    <h1>Importar CSV</h1>
+                    <p>A continuación se puede elegir entre importar csv de usuario o csv de reseñas.</p>
+                </div>
+
+                <div class="container-fluid"> <!-- If Needed Left and Right Padding in 'md' and 'lg' screen means use container class -->
+                    <div class="row text-center">
+                        <div class="  col-lg-4">
+                            <form enctype='multipart/form-data' action='index.php?accion=usuario&id=6' method='post'>
+		
+                                <label>Subi CSV de Usuarios</label>
+                                
+                                <input size='50' type='file' name='filename'>
+                                </br>
+                                <input type='submit' name='submit' value='Subir Usuarios'>
+                                
+                             </form>
+                        </div>
+                       
+                         
+                        <div class="col-lg-4 ml-5">
+                            <form enctype='multipart/form-data' action='index.php?accion=acta&id=10' method='post'>
+		
+                                <label>Subi CSV de Reseñas</label>
+                            
+                                <p class="badge badge-light">Por este metodo las reseñas solo tendran la imagen por defecto</p>
+                            
+                                <input size='50' type='file' name='filename'>
+                            </br>
+                                <input type='submit' name='submit' value='Subir Actas'>
+                                
+                             </form>
+                        </div>
+                       
+                       
+                    </div>
                 </div>
                 
-                <form enctype='multipart/form-data' action='index.php?accion=usuario&id=6' method='post'>
-		
-                    <label>Upload Product CSV file Here</label>
-                    
-                    <input size='50' type='file' name='filename'>
-                    </br>
-                    <input type='submit' name='submit' value='Upload Products'>
-                    
-                    </form>
+               
                    
             </div>
             <!-- /.row -->

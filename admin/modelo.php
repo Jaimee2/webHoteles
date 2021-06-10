@@ -69,7 +69,11 @@ function mAdminIniciado() {
 
     function mCogerActas() {
         $con = conexion();
-        $consulta = "Select * from final_actas,final_paises,final_usuarios where final_actas.idpais = final_paises.idpais and final_usuarios.idusuario = final_actas.idusuario ORDER BY fecha_creacion DESC";
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_actas.descripcion,final_actas.idlugar,final_paises.nombre,final_usuarios.nick 
+						FROM `final_actas`,final_paises,final_usuarios
+							WHERE final_actas.idpais = final_paises.idpais
+							and final_usuarios.idusuario = final_actas.idusuario
+								ORDER BY fecha_creacion DESC";
         $listaActas = $con->query($consulta);
         return $listaActas;
     }
@@ -117,8 +121,9 @@ function mAdminIniciado() {
 		$titulo = $_POST["titulo"];
 		$descripcion = $_POST["descripcion"];
 		$idActa = $_POST["idacta"];
-		$cambioActa = "UPDATE actas
-                         SET final_titulo = '$titulo', descripcion = '$descripcion'
+		echo $idActa;
+		$cambioActa = "UPDATE final_actas
+                         SET titulo = '$titulo', descripcion = '$descripcion'
                          WHERE idacta = '$idActa'";
 
 		return $con->query($cambioActa);
@@ -135,6 +140,14 @@ function mAdminIniciado() {
 			return $idActa;
 		else
 			return -1;
+	}
+
+	function mBorrarFotoActa($idActa, $idFoto, $rutaFoto) {
+		unlink($rutaFoto);
+		$con = conexion();
+		$consulta = "DELETE FROM final_fotos WHERE idfoto = '$idFoto'";
+		$con->query($consulta);
+		return $idActa;
 	}
     
     function mObtenerActasJSON() {
@@ -181,9 +194,6 @@ function mAdminIniciado() {
 
 	function mImportarUsuariosCSV(){
 		
-		
-		
-		
 		//si existe fichero entramos
 		if (isset($_POST['submit'])) 
 		{
@@ -217,5 +227,46 @@ function mAdminIniciado() {
 			}
 		return $resultado;	
 	}
+
+
+
+	function mImportarActasCSV(){
+		
+		//si existe fichero entramos
+		if (isset($_POST['submit'])) 
+		{
+			$con = conexion();
+			
+			$archivo = fopen($_FILES['filename']['tmp_name'], "r");
+
+			//Lo recorremos
+			while (($datos = fgetcsv($archivo,1000,";")) == true) {
+				$num = count($datos);
+				
+				$titulo = $datos[0];
+				$puntuacion = $datos[1];
+				$descripcion = $datos[2];
+				$idlugar = $datos[3];
+				$idpais = $datos[4];
+				$idusuario = $datos[5];
+				echo $titulo;
+				
+				//obtenemos los datos de la row
+				if($titulo != ""){
+					$consulta = "INSERT INTO `final_actas`(`titulo`, `puntuacion`, `descripcion`, `idlugar`, `idpais`, `idusuario`)
+								 VALUES ('$titulo',$puntuacion,'$descripcion',$idlugar,$idpais,$idusuario)";
+				
+				$resultado = $con->query($consulta);
+				//
+				}
+				
+
+			}
+			//Cerramos el archivo
+			fclose($archivo);
+			}
+		return $resultado;	
+	}
+ 
  
 ?>

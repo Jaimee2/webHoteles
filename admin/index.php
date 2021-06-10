@@ -77,13 +77,23 @@
                 vMostrarResultadoEliminacionComentarioActa(mBorrarComentario($_GET['idacta'], $_GET['idcomentario']));
                 break;
             case 6:
-                vMostrarResultadoModificacionActa(mModificarActa($_GET["idacta"]));
+                
+                vMostrarResultadoModificacionActa(mModificarActa());
                 break;
             case 7:
                 convertirAPDF(vCogerTablaActasHTML(mCogerActas()), 'actas-'.date("y-m-d"));
                 break;
             case 8:
                 vMostrarJSON(mObtenerActasJSON(), "actas.json");
+                break;
+                case 9:
+                    vMostrarImportarActasCSV();
+                break;
+                case 10: 
+                    vMostrarResultadoImportarActasCSV(mImportarActasCSV());
+                break;
+                case 11:
+                    vMostrarResultadoBorradoFotoActa(mBorrarFotoActa($_GET["idacta"], $_GET["idfoto"], $_GET["ruta"]));
                 break;
             
         }
@@ -116,8 +126,7 @@
             case 5:
                 vMostrarImportarUsuariosCSV();
             break;
-            case 6:
-                
+            case 6: 
                 vMostrarResultadoImportarUsuariosCSV(mImportarUsuariosCSV());
                 break;
 

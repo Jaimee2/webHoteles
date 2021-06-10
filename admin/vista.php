@@ -35,6 +35,7 @@ function vMostrarActas($actas) {
         $aux = str_replace("##id##", $acta["idacta"], $aux);
         $aux = str_replace("##idlugar##", $acta["idlugar"], $aux);
         $aux = str_replace("##pais##", $acta["nombre"], $aux);
+        $aux = str_replace("##nick##", $acta["nick"], $aux);
         $aux = str_replace("##titulo##", $acta["titulo"], $aux);
         $aux = str_replace("##estrellas##", $acta["puntuacion"], $aux);
         
@@ -127,10 +128,12 @@ function vMostrarModificarActa($acta, $fotosActa, $comentariosActa) {
 }
 
 function vMostrarResultadoModificacionActa($resultado) {
+   
     if ($resultado) 
         header("location: index.php?accion=acta&id=1"); 
     else
-        vMostrarMensaje("Error al modificar la reseña", "No se ha podido modificar la reseña");
+    
+     vMostrarMensaje("Error al modificar la reseña", "No se ha podido modificar la reseña");
 }
 
 function vMostrarResultadoEliminacionComentarioActa($resultado) {
@@ -201,12 +204,10 @@ function vCogerTablaUsuariosHTML($usuarios) {
 
 function vMostrarImportarUsuariosCSV(){
 
-    $cadena = file_get_contents("vistas/csvUsuarios.html");
+    $cadena = file_get_contents("vistas/csv.html");
 
     echo $cadena;
 }
-
-
 
     function vMostrarResultadoImportarUsuariosCSV($resultado){
         if ($resultado) {
@@ -217,4 +218,34 @@ function vMostrarImportarUsuariosCSV(){
             echo $resultado;
         }
     }
+
+
+
+
+
+    function vMostrarImportarActasCSV(){
+
+        $cadena = file_get_contents("vistas/csv.html");
+    
+        echo $cadena;
+    }
+    
+    
+    
+        function vMostrarResultadoImportarActasCSV($resultado){
+            if ($resultado) {
+                header('location: index.php?accion=acta&id=1');
+            
+            } else {
+                
+                vMostrarMensaje("Error al insertar csv", "Intentelo de nuevo");
+                echo $resultado;
+            }
+        }
+        function vMostrarResultadoBorradoFotoActa($resultado) {
+            if ($resultado > 0)
+                header("location: index.php?accion=acta&id=3&idacta=$resultado");
+            else
+                vMostrarMensaje("Error al eliminar la foto", "Se ha producido un error al eliminar la foto"); 
+        } 
 ?>

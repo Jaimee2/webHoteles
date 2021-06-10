@@ -1,4 +1,6 @@
 <?php
+// Notificar solamente errores de ejecución
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 include "modelo.php";
 include "vista.php";
@@ -118,6 +120,7 @@ if ($accion == "acta") {
             vMostrarEdicionActa(mLeerActa($_GET["idacta"]), mCargarFotosActa($_GET["idacta"]),mIniciadoYExisteBD());
             break;
         case 9:
+            
             vMostrarResultadoActualizacionActa(mActualizarActa());
             break;
         case 10:

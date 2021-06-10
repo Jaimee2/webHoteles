@@ -86,14 +86,14 @@
         <div class="container-fluid">
             <!-- Page Heading -->
             
-            <div class="row text-center" id="main" >
+            <div class="row" id="main" >
 
                 
 
 
                 <div class="col-sm-12 col-md-12 " id="content">
 						
-						<table  class="table table-striped text-center">
+						<table  class="table table-striped">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -101,7 +101,7 @@
 									<th>Pais</th>
 									<th>Titulo</th>
 									<th>Estrellas</th>
-									
+									<th>Nick usuario</th>
 									<th>Modificar</th>
 									<th>Eliminar</th>
 								</tr>
@@ -114,6 +114,7 @@
 									<td>##pais##</td>
 									<td>##titulo##</td>
 									<td>##estrellas##</td>
+                                    <td>##nick##</td>
 									
 									<td><a href="index.php?accion=acta&id=3&idacta=##id##">Modificar</a></td>
 									<!-- <td><a id="eliminar" href="index.php?accion=acta&id=8&idacta=##idActa##">Eliminar</a></td> -->
@@ -122,14 +123,15 @@
 								##Acta##	
 							</tbody>	
 						</table>
-						<div class="container mt-2">
+						<div class="container text-center mt-2">
 							<a href="index.php?accion=acta&id=7" target="_blank" class="btn btn-primary btn-sm ms-1">Obtener PDF</a>
 						<a href="index.php?accion=acta&id=8" target="_blank" download="actas.json"class="btn btn-info btn-sm ms-1">Obtener JSON</a>
-							
+                        <br><br>
+                        <a href="index.php">Volver</a>
 						</div>
 						
 						<br>
-						<a href="index.php">Volver</a>
+						
                 </div>
             </div>
             <!-- /.row -->
