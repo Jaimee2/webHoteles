@@ -460,8 +460,12 @@ function vMostrarFotos($fotos, $trozoActa, &$trozosFoto) {
 	return $cuerpo;
 }
 
-function vMostrarInformacionUsuario($usuario) {
-	$pagina = file_get_contents("vistas/informacionusuario.html");
+function vMostrarInformacionUsuario($usuario,$usuarioIniciado) {
+
+	$vista = "vistas/informacionusuario.html";
+
+	$pagina = vMostrarCabecera($usuarioIniciado,$vista);
+
 	$pagina = str_replace("##nick##", $usuario["nick"], $pagina);
 	$pagina = str_replace("##nombre##", $usuario["nombre"], $pagina);
 	$pagina = str_replace("##apellidos##", $usuario["apellidos"], $pagina);

@@ -1,7 +1,7 @@
 <?php
 // Notificar solamente errores de ejecución
 
-error_reporting(0);
+//error_reporting(0);
 include "modelo.php";
 include "vista.php";
 
@@ -67,7 +67,7 @@ if ($accion == "usuario") {
             mCerrarSesion();
             break;
         case 6:
-            vMostrarInformacionUsuario(mCargarInformacionUsuario($_SESSION["idusuario"]));
+            vMostrarInformacionUsuario(mCargarInformacionUsuario($_SESSION["idusuario"]),mIniciadoYExisteBD());
             break;
         case 7:
             vMostrarResultadoCambioInformacionUsuario(mCambiarInformacionUsuario());

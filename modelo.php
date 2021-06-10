@@ -241,19 +241,31 @@ function mFotosActa($idlugar,$titulo,$idUsuario, $con) {
     // Fotos máximas que puede haber en una reseña
     $fotos = $con->query($consulta);
     $i = 5;
-    while ($foto = $fotos->fetch_assoc()) {
-        if ($i == 0)
-            break;
+    if($fotos->fetch_assoc() > 0){
+        while ($foto = $fotos->fetch_assoc()) {
+            if ($i == 0)
+                break;
+            
+            $nombreFoto = $foto['nombre'];//obtenemos los nombres de las fotos en la tabla fotos_subiendo
+            $nuevaRuta = "fotos/" . $nombreFoto; 
+            mMoverFoto($nombreFoto, $nuevaRuta);//cambiamos la ruta cambiando su nombre con rename
+            $consultaMeterFoto = "INSERT INTO final_fotos (nombre, ruta, idacta)
+                                            VALUES ('$nombreFoto', '$nuevaRuta', '$idActa')";//consolidamos la foto en la tabla fotos asociandola al idcta
+            $con->query($consultaMeterFoto);
+            $i--;
+
+        }
+        eliminarRestoFotos($foto, $fotos, $idUsuario, $con);
+    }else{
         
-        $nombreFoto = $foto['nombre'];//obtenemos los nombres de las fotos en la tabla fotos_subiendo
-        $nuevaRuta = "fotos/" . $nombreFoto; 
-        mMoverFoto($nombreFoto, $nuevaRuta);//cambiamos la ruta cambiando su nombre con rename
-        $consultaMeterFoto = "INSERT INTO final_fotos (nombre, ruta, idacta)
-                                         VALUES ('$nombreFoto', '$nuevaRuta', '$idActa')";//consolidamos la foto en la tabla fotos asociandola al idcta
-        $con->query($consultaMeterFoto);
-        $i--;
+        $nombreFoto = 'monumento';//obtenemos los nombres de las fotos en la tabla fotos_subiendo
+            $nuevaRuta = "fotos/monumento.png"; 
+            //mMoverFoto($nombreFoto, $nuevaRuta);//cambiamos la ruta cambiando su nombre con rename
+            $consultaMeterFoto = "INSERT INTO final_fotos (nombre, ruta, idacta)
+                                            VALUES ('$nombreFoto', '$nuevaRuta', '$idActa')";//consolidamos la foto en la tabla fotos asociandola al idcta
+            $con->query($consultaMeterFoto);
     }
-    eliminarRestoFotos($foto, $fotos, $idUsuario, $con);
+    
     return true;
 }
 
