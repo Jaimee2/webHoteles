@@ -155,7 +155,7 @@
 		echo $trozos[0] . $cuerpo . $trozos[2];
 	}
 
-	function vMostrarBusqueda($actas, $fotosActa){
+	function vMostrarBusqueda($actas){
 		  // Muestra las actas en la página principal despues de una busqueda
 		
 		$pagina = file_get_contents("vistas/mostrarActasPrincipal.html");
@@ -165,7 +165,7 @@
 		$aux = "";
 		$cuerpo = "";
 		while ($datos = $actas->fetch_assoc()) {
-			$foto = $fotosActa->fetch_assoc();
+			
 			$aux = $trozos[1];
 			//$aux = str_replace("##lugar##", "$datos["nombrelugar"]", $aux);
 			$aux = str_replace("##pais##", $datos["nombre"], $aux);
@@ -216,9 +216,9 @@
 			
 			// CAMBIAR EL MOSTRAR ACTA EN OTRA VENTANA
 			$aux = str_replace("##idActa##", $datos["idacta"], $aux);//pone el idacta en la url
-			if (!is_null($foto['ruta'])){
+			if (!is_null($datos["rutaFoto"])){
 				
-				$aux = str_replace("##foto##", $foto['ruta'], $aux);
+				$aux = str_replace("##foto##", $datos["rutaFoto"], $aux);
 			}else{ 
 				$aux = str_replace("##foto##", 	"fotos/monumento.png" , $aux);
 			}

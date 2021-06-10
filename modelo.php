@@ -392,60 +392,78 @@ function mRealizarBusquedaPais() {
     $puntuacion =  $_GET['puntuacion'];
     $texto = $_GET['texto'];
     
+
     if ($idpais == '0' && $puntuacion == '0' && $texto ==""){
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
-                    WHERE final_actas.idpais = final_paises.idpais
-                    ";
+        //ok
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto
+                        FROM final_actas,final_paises,final_fotos
+                        WHERE final_actas.idpais = final_paises.idpais
+                            and final_actas.idacta = final_fotos.idacta 
+                        GROUP by final_actas.idacta ";
     }else if ($idpais != '0' && $puntuacion == '0' && $texto ==""){
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
-                    and final_paises.idpais = '$idpais'";
+
+                        and final_paises.idpais = '$idpais'
+
+                        and final_actas.idacta = final_fotos.idacta 
+                    GROUP by final_actas.idacta ";
     }else if ($idpais == '0' && $puntuacion != '0' && $texto ==""){
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
-                    and final_actas.puntuacion = $puntuacion";
+
+                        and final_actas.puntuacion = $puntuacion
+
+                        and final_actas.idacta = final_fotos.idacta 
+                     GROUP by final_actas.idacta";
     }else if ($idpais != '0' && $puntuacion != '0'&& $texto ==""){
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
                     and final_paises.idpais = '$idpais'
-                    and final_actas.puntuacion = '$puntuacion'";
+                    and final_actas.puntuacion = '$puntuacion'
+                    and final_actas.idacta = final_fotos.idacta 
+                    GROUP by final_actas.idacta";
 
     }elseif($idpais != '0' && $puntuacion != '0' && $texto !=""){
        
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
-                    and final_paises.idpais = '$idpais'
-                    and final_actas.puntuacion = '$puntuacion'
-                    and final_actas.titulo like '%$texto%'";
+                        and final_paises.idpais = '$idpais'
+                        and final_actas.puntuacion = '$puntuacion'
+                        and final_actas.idacta = final_fotos.idacta 
+                        and final_actas.titulo like '%$texto%'
+                    GROUP by final_actas.idacta";
     }elseif($idpais == '0' && $puntuacion != '0' && $texto !=""){
        
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto 
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
-                    
+                    and final_actas.idacta = final_fotos.idacta 
                     and final_actas.puntuacion = '$puntuacion'
-                    and final_actas.titulo like '%$texto%'";
+                    and final_actas.titulo like '%$texto%'
+                    GROUP by final_actas.idacta";
     }elseif($idpais != '0' && $puntuacion == '0' && $texto !=""){
        
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto 
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
                     and final_paises.idpais = '$idpais'
-                    
-                    and final_actas.titulo like '%$texto%'";
+                    and final_actas.idacta = final_fotos.idacta 
+                    and final_actas.titulo like '%$texto%'
+                    GROUP by final_actas.idacta";
     }elseif($idpais == '0' && $puntuacion == '0' && $texto !=""){
-       
-        $consulta = "SELECT * 
-                    FROM final_actas,final_paises
+       //ok
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_paises.nombre,min(final_fotos.ruta) as rutaFoto
+                    FROM final_actas,final_paises,final_fotos
                     WHERE final_actas.idpais = final_paises.idpais
+                    and final_actas.idacta = final_fotos.idacta 
                     
-                    
-                    and final_actas.titulo like '%$texto%'";
+                    and final_actas.titulo like '%$texto%'
+                    GROUP by final_actas.idacta";
     }else{
         echo "no entro en nigun if ";
     }

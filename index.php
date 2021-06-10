@@ -1,7 +1,7 @@
 <?php
 // Notificar solamente errores de ejecución
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
+error_reporting(0);
 include "modelo.php";
 include "vista.php";
 
@@ -111,7 +111,7 @@ if ($accion == "acta") {
             break;
         case 6:
             //busqueda
-            vMostrarBusqueda(mRealizarBusquedaPais(),mCogerFotosActa());
+            vMostrarBusqueda(mRealizarBusquedaPais());
             break;
         case 7:
             vMostrarActasUsuario(mCargarActasUsuario(),mIniciadoYExisteBD());
