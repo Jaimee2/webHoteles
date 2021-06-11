@@ -249,6 +249,7 @@ function mFotosActa($idlugar,$titulo,$idUsuario, $con) {
             $nombreFoto = $foto['nombre'];//obtenemos los nombres de las fotos en la tabla fotos_subiendo
             $nuevaRuta = "fotos/" . $nombreFoto; 
             mMoverFoto($nombreFoto, $nuevaRuta);//cambiamos la ruta cambiando su nombre con rename
+            //aqui creo nueva ruta para las carpetas medianas y pequeñas
             $consultaMeterFoto = "INSERT INTO final_fotos (nombre, ruta, idacta)
                                             VALUES ('$nombreFoto', '$nuevaRuta', '$idActa')";//consolidamos la foto en la tabla fotos asociandola al idcta
             $con->query($consultaMeterFoto);

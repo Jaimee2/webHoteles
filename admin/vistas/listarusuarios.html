@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <script type="text/javascript">
-		function alerta(idUsuario) {
-			var direccion = "index.php?accion=usuario&id=2&idusuario=";
-			direccion = direccion.concat(idUsuario);
-		    var opcion = confirm("¿Está seguro de que desea eliminar el usuario?");
-		    if (opcion == true) {
-		        window.location = direccion;
-			} 
-		}
-	</script>
-</head>
-<body>
-
-
-    
-    
-</body>
-</html>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adminstrador</title>
+
 	<script type="text/javascript">
 		function alerta(idActa) {
 			var direccion = "index.php?accion=usuario&id=2&idusuario=";
@@ -72,21 +43,17 @@
         </div>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.php?">Home <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <!-- Top Menu Items -->
         
         <ul class="nav navbar-right top-nav">
-                <li><a href="#" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i class="fa fa-bar-chart-o"></i>
-                    </a>
-                </li>            
+                           
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
-                        <li class="divider"></li>
+                       
                         <li><a href="index.php?accion=principal&id=4"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                     </ul>
                 </li>
@@ -106,9 +73,7 @@
                     <li>
                         <a href="index.php?accion=usuario&id=5"><i class="fa fa-fw fa fa-question-circle"></i> Importacion CSV Usuarios</a>
                     </li>
-                    <li>
-                        <a href="index.php?accion=usuario&id=5"><i class="fa fa-fw fa fa-question-circle"></i> Importacion CSV Actas</a>
-                    </li>
+                    
                 </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -4,7 +4,7 @@ session_start();
 
 function conexion() {
     $con = mysqli_connect("localhost", "root", "", "proyecto");
-##	$con = mysqli_connect("dbserver", "grupo15", "quohy9Oquu", "db_grupo15");
+//$con = mysqli_connect("dbserver", "grupo35", "fo5quooVae", "db_grupo35");
     $acentos = $con->query("SET NAMES 'utf8'");
     return $con;
 }
@@ -69,7 +69,10 @@ function mAdminIniciado() {
 
     function mCogerActas() {
         $con = conexion();
-        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,final_actas.descripcion,final_actas.idlugar,final_paises.nombre,final_usuarios.nick 
+        $consulta = "SELECT final_actas.idacta,final_actas.titulo,final_actas.puntuacion,
+							final_actas.descripcion,final_actas.idlugar,
+							final_paises.nombre,final_usuarios.nick 
+
 						FROM `final_actas`,final_paises,final_usuarios
 							WHERE final_actas.idpais = final_paises.idpais
 							and final_usuarios.idusuario = final_actas.idusuario
@@ -121,7 +124,7 @@ function mAdminIniciado() {
 		$titulo = $_POST["titulo"];
 		$descripcion = $_POST["descripcion"];
 		$idActa = $_POST["idacta"];
-		echo $idActa;
+		
 		$cambioActa = "UPDATE final_actas
                          SET titulo = '$titulo', descripcion = '$descripcion'
                          WHERE idacta = '$idActa'";
@@ -210,7 +213,7 @@ function mAdminIniciado() {
 				$apellidos = $datos[2];
 				$correo = $datos[3];
 				$contraseña = $datos[4];
-				echo $nick,$nombre,$apellidos,$correo,$contraseña;
+				
 				//obtenemos los datos de la row
 				if($nick != ""){
 					$consulta = "INSERT INTO `final_usuarios`(`nick`, `nombre`, `apellidos`, `correo`, `clave`)
@@ -224,7 +227,7 @@ function mAdminIniciado() {
 			}
 			//Cerramos el archivo
 			fclose($archivo);
-			}
+		}
 		return $resultado;	
 	}
 
@@ -249,15 +252,40 @@ function mAdminIniciado() {
 				$idlugar = $datos[3];
 				$idpais = $datos[4];
 				$idusuario = $datos[5];
-				echo $titulo;
 				
-				//obtenemos los datos de la row
-				if($titulo != ""){
-					$consulta = "INSERT INTO `final_actas`(`titulo`, `puntuacion`, `descripcion`, `idlugar`, `idpais`, `idusuario`)
-								 VALUES ('$titulo',$puntuacion,'$descripcion',$idlugar,$idpais,$idusuario)";
+
+				$ExistenciaUsuario = "SELECT * 
+										from final_usuarios 
+										where final_usuarios.idusuario = $idusuario";
+                                
+				$resultadoU =  $con->query($ExistenciaUsuario);
+				if ( !empty($resultadoU->num_rows) && $resultadoU->num_rows > 0){
 				
-				$resultado = $con->query($consulta);
-				//
+					//obtenemos los datos de la row
+					if($titulo != ""){
+						$consulta = "INSERT INTO `final_actas`(`titulo`, `puntuacion`, `descripcion`,
+																	`idlugar`, `idpais`, `idusuario`)
+									VALUES ('$titulo',$puntuacion,'$descripcion',$idlugar,$idpais,$idusuario)";
+					
+					
+						$resultado = $con->query($consulta);
+						echo"$titulo";
+						$queID = "SELECT *
+										from final_actas
+										where final_actas.titulo = '$titulo'";
+                                
+						$resultadoid =  $con->query($queID);
+						$datosC = $resultadoid->fetch_assoc();
+						$idActa = $datosC["idacta"];
+						echo"<br> ID ACTA:". $idActa;
+
+						$nuevaRuta = "fotos/monumento.png";
+						$nombreFoto = 'monumento';
+						$consultaMeterFoto = "INSERT INTO final_fotos (nombre, ruta, idacta)
+						VALUES ('$nombreFoto', '$nuevaRuta', '$idActa')";//consolidamos la foto en la tabla fotos asociandola al idcta
+						$con->query($consultaMeterFoto);
+					//
+					}
 				}
 				
 

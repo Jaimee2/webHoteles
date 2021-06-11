@@ -58,6 +58,9 @@
      *      6.Mostrar resultado modificacion de la reseña
      *      7.PDF
      *      8.Json
+     *      9.
+     *      10.
+     *      11.
      *************************/
 
     if ($accion == "acta") {
@@ -77,7 +80,6 @@
                 vMostrarResultadoEliminacionComentarioActa(mBorrarComentario($_GET['idacta'], $_GET['idcomentario']));
                 break;
             case 6:
-                
                 vMostrarResultadoModificacionActa(mModificarActa());
                 break;
             case 7:
@@ -86,14 +88,15 @@
             case 8:
                 vMostrarJSON(mObtenerActasJSON(), "actas.json");
                 break;
-                case 9:
-                    vMostrarImportarActasCSV();
+            case 9:
+                vMostrarImportarActasCSV();
                 break;
-                case 10: 
-                    vMostrarResultadoImportarActasCSV(mImportarActasCSV());
+            case 10: 
+                
+                vMostrarResultadoImportarActasCSV(mImportarActasCSV());
                 break;
-                case 11:
-                    vMostrarResultadoBorradoFotoActa(mBorrarFotoActa($_GET["idacta"], $_GET["idfoto"], $_GET["ruta"]));
+            case 11:
+                vMostrarResultadoBorradoFotoActa(mBorrarFotoActa($_GET["idacta"], $_GET["idfoto"], $_GET["ruta"]));
                 break;
             
         }
@@ -103,9 +106,11 @@
      * accion = usuario
      * id:
      *      1. Mostrar un listado de los usuarios de la aplicacion
-     *      2.  Mostrar resultado eliminacion del usuario 
+     *      2. Mostrar resultado eliminacion del usuario 
      *      3. PDF
-     *      4.Json
+     *      4. Json
+     *      5.
+     *      6.
      *************************/
 
     if ($accion == "usuario") {
@@ -128,7 +133,7 @@
             break;
             case 6: 
                 vMostrarResultadoImportarUsuariosCSV(mImportarUsuariosCSV());
-                break;
+            break;
 
         }
     }
