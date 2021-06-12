@@ -1,23 +1,19 @@
-# Título del Proyecto
+# Web de reseñas de hoteles
 
-_Acá va un párrafo que describa lo que es el proyecto_
 
-## Comenzando 🚀
+## Motiviación 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
-Mira **Deployment** para conocer como desplegar el proyecto.
+La web se ha realizado como proyecto ha realizar de la asignatura de **sistemas de información web**
 
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+Un servidor web, por ejemplo XAMPP donde tengamos activados los servicios Apache y MySQL.
 
-```
-Da un ejemplo
-```
+
 
 ### Instalación 🔧
+Solo se necesita alojar la BBDD en mi caso en MySQL
 
 _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
