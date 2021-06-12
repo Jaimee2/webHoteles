@@ -30,6 +30,8 @@ El objetivo de este proyecto ha sido practicar los conocimientos adquiridos de
 
 La web se compone de un **Frontend** y un **Backoffice**
 
+### Tipos de usuarios
+
 #### Usuarios anónimos
  1.	Podrán leer las reseñas, les aparecerá: nombre del hotel, título de la reseña, puntuación y una foto en pequeño.
  2. Al darle clic en la reseña que se muestra en pequeño se podrá ver al completo la publicación. Donde se verá el título, la opinión completa del hotel, la puntuación y un apartado de fotos; donde primero aparecerán las imágenes en mediano y al darle clic se verán en grande y se podrá pasar de una a otra. 
@@ -53,7 +55,7 @@ La web se compone de un **Frontend** y un **Backoffice**
 6.	El administrador podrá subir ficheros csv para poblar la pagina web.
 
 ## Comentario final
-El objetivo fundamental es paractiar los conocimentos adquiridos durante el curso, no se han tenido encuenta buenas gestiones de contraseñas, robusted de la pagina web, escalabilidad, sql inyection etc...
+El objetivo fundamental es practicar los conocimentos adquiridos durante el curso, no se han tenido encuenta buenas gestiones de contraseñas, robusted de la pagina web, escalabilidad, sql inyection etc...
 
 
 ## Autores ✒️
