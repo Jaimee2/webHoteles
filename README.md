@@ -30,7 +30,7 @@ El objetivo de este proyecto ha sido practicar los conocimientos adquiridos de
 
 La web se compone de un **Frontend** y un **Backoffice**
 
-### Tipos de usuarios
+### Tipos de usuarios :busts_in_silhouette:
 
 #### Usuarios anónimos
  1.	Podrán leer las reseñas, les aparecerá: nombre del hotel, título de la reseña, puntuación y una foto en pequeño.
@@ -46,7 +46,7 @@ La web se compone de un **Frontend** y un **Backoffice**
  3.	Al añadir una reseña; los usuarios escribirán el título de la reseña, el nombre del hotel, la ciudad, la descripción del hotel, la puntuación y las fotos que quieren subir.
  4. Verán desde su perfil todas las reseñas que han publicado, podrán editarlas o eliminarlas.
  
-#### Administradores
+#### Administradores :cop:
 1.	El administrador podrá obtener distintos listados como el de todos los usuarios, reseñas, hoteles, paises y comentarios. 
 2.	El administrador podrá obtener un listado de todos los usuarios, reseñas, hoteles y paises. Tendrá un botón para poder exportar todo en formato PDF. 
 3.	El administrador tendrá otro botón para poder exportar los datos en formato JSON.
